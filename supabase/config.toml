@@ -1,0 +1,7 @@
+[functions.verify-report]
+verify_jwt = false
+entrypoint = "./functions/verify-report/index.ts"
+
+[functions.create-admin]
+verify_jwt = false
+entrypoint = "./functions/create-admin/index.ts"
