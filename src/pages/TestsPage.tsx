@@ -207,7 +207,7 @@ const diagnosticTests: DiagnosticTest[] = [
   }
 ];
 
-export default function TestsPage() {
+export function TestsPage() {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
 
