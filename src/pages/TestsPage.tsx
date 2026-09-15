@@ -1,22 +1,24 @@
 import React, { useState, useMemo } from 'react';
 
-interface DiagnosticTest {
+interface DiagnosticItem {
   id: string;
   name: string;
   price: number;
   originalPrice?: number;
-  category: 'Tests' | 'Packages' | 'Check-Up';
+  type: 'Test' | 'Package';
+  category: string;
   description: string;
   parameters: string[];
 }
 
-const diagnosticTests: DiagnosticTest[] = [
-  // --- TEST BUNDLES (Test 1 - Test 9) ---
+const allCatalogItems: DiagnosticItem[] = [
+  // --- INDIVIDUAL TESTS (Test 1 - Test 9) ---
   {
     id: 'test-1',
     name: 'Test 1',
     price: 99,
-    category: 'Tests',
+    type: 'Test',
+    category: 'Essential Blood Test',
     description: 'Essential blood screening focusing on complete blood count and inflammation markers.',
     parameters: ['Complete Blood Count (CBC) full parameters', 'ESR']
   },
@@ -24,7 +26,8 @@ const diagnosticTests: DiagnosticTest[] = [
     id: 'test-2',
     name: 'Test 2',
     price: 299,
-    category: 'Tests',
+    type: 'Test',
+    category: 'Kidney & Sugar',
     description: 'Kidney function and sugar screening profile.',
     parameters: ['FBS', 'EGFR', 'RFT (Full Parameters)', 'UR/E (Full Parameters)']
   },
@@ -32,7 +35,8 @@ const diagnosticTests: DiagnosticTest[] = [
     id: 'test-3',
     name: 'Test 3',
     price: 599,
-    category: 'Tests',
+    type: 'Test',
+    category: 'Iron & Anemia Profile',
     description: 'Comprehensive iron deficiency and blood profile.',
     parameters: ['Iron', 'TIBC', 'Ferritin', 'CBC (Full parameters)', 'ESR']
   },
@@ -40,7 +44,8 @@ const diagnosticTests: DiagnosticTest[] = [
     id: 'test-4',
     name: 'Test 4',
     price: 799,
-    category: 'Tests',
+    type: 'Test',
+    category: 'Metabolic & Diabetic Screen',
     description: 'Advanced diabetic, renal, and lipid assessment.',
     parameters: ['FBS', 'HbA1c', 'CBC (Full parameters)', 'ESR', 'RFT (Full parameters)', 'UR/E (Full parameters)', 'Lipid (Full parameters)']
   },
@@ -48,7 +53,8 @@ const diagnosticTests: DiagnosticTest[] = [
     id: 'test-5',
     name: 'Test 5',
     price: 899,
-    category: 'Tests',
+    type: 'Test',
+    category: 'Advanced Renal & Sugar',
     description: 'Targeted microalbumin, diabetes, and lipid profile.',
     parameters: ['FBS', 'EGFR', 'HbA1c', 'Microalbumin', 'Creatinine', 'CBC (Full parameters)', 'Lipid (Full parameters)']
   },
@@ -56,7 +62,8 @@ const diagnosticTests: DiagnosticTest[] = [
     id: 'test-6',
     name: 'Test 6',
     price: 1499,
-    category: 'Tests',
+    type: 'Test',
+    category: 'Cardiac & Pancreatic',
     description: 'Cardiac, pancreatic, and inflammatory enzyme markers.',
     parameters: ['HSCRP', 'Lipase', 'Amylase', 'LDH', 'CBC (Full parameters)', 'ESR']
   },
@@ -64,7 +71,8 @@ const diagnosticTests: DiagnosticTest[] = [
     id: 'test-7',
     name: 'Test 7',
     price: 1999,
-    category: 'Tests',
+    type: 'Test',
+    category: 'Multi-Organ Panel',
     description: 'Multi-organ comprehensive diagnostic panel.',
     parameters: ['CRP', 'ASO', 'RA', 'Calcium', 'CBC (Full parameters)', 'RFT (Full parameters)', 'UR/E (Full parameters)', 'Lipid (Full parameters)', 'LFT (Full parameters)']
   },
@@ -72,7 +80,8 @@ const diagnosticTests: DiagnosticTest[] = [
     id: 'test-8',
     name: 'Test 8',
     price: 2499,
-    category: 'Tests',
+    type: 'Test',
+    category: 'Thyroid & Electrolyte',
     description: 'Advanced thyroid, electrolyte, and metabolic screening.',
     parameters: [
       'FBS', 'HbA1c', 'Microalbumin', 'TSH', 'Anti TPO', 'Calcium', 
@@ -84,7 +93,8 @@ const diagnosticTests: DiagnosticTest[] = [
     id: 'test-9',
     name: 'Test 9',
     price: 2999,
-    category: 'Tests',
+    type: 'Test',
+    category: 'Comprehensive Expert Test',
     description: 'Comprehensive multi-system expert health evaluation.',
     parameters: [
       'EGFR', 'HbA1c', 'GGT', 'Anti TPO', 'Testo', 'Amylase', 'Iron', 
@@ -99,7 +109,8 @@ const diagnosticTests: DiagnosticTest[] = [
     name: 'Complete Body Check-Up',
     price: 999,
     originalPrice: 4999,
-    category: 'Check-Up',
+    type: 'Package',
+    category: 'Featured Package',
     description: 'Full body health evaluation covering vital metabolic, lipid, liver, kidney, and thyroid markers.',
     parameters: [
       'Fastings Blood Sugar (FBS)',
@@ -108,7 +119,7 @@ const diagnosticTests: DiagnosticTest[] = [
       'Kidney Function Tests (Blood Urea, Serum Creatinine, Uric Acid, BUN)',
       'Urine Complete Analysis (Colour, Appearance, Volume, Specific Gravity, pH, Nitrate, Ketone, Urobilinogen, Albumin, Sugar, Pus Cells, RBC, Casts, Bacteria)',
       'Iron & Vitamins (Iron, Vitamin B12, Free T3, Free T4, TSH)',
-      'Complete Blood Count (CBC + ESR - 22 Parameters including Haemoglobin, Total/Differential Counts, Platelets, RBC, PCV, MCV, MCH, MCHC, MPV, RDW)'
+      'Complete Blood Count (CBC + ESR - 22 Parameters)'
     ]
   },
   {
@@ -116,7 +127,8 @@ const diagnosticTests: DiagnosticTest[] = [
     name: 'Basic Health Package',
     price: 599,
     originalPrice: 1150,
-    category: 'Packages',
+    type: 'Package',
+    category: 'Wellness Package',
     description: 'Essential wellness screening for routine health monitoring.',
     parameters: ['FBS', 'Lipid Profile', 'LFT', 'CBC', 'Urine Routine']
   },
@@ -125,7 +137,8 @@ const diagnosticTests: DiagnosticTest[] = [
     name: 'Primary Health Package (Above 40 Years - Male)',
     price: 799,
     originalPrice: 2530,
-    category: 'Packages',
+    type: 'Package',
+    category: 'Age-Specific Package',
     description: 'Tailored health screening for men above 40 focusing on cardiac, liver, kidney, and prostate health.',
     parameters: ['FBS', 'PPBS', 'Lipid Profile', 'LFT', 'RFT', 'Calcium', 'PSA', 'HbA1c', 'Urine Routine']
   },
@@ -134,7 +147,8 @@ const diagnosticTests: DiagnosticTest[] = [
     name: 'Primary Health Package (Above 40 Years - Female)',
     price: 799,
     originalPrice: 2550,
-    category: 'Packages',
+    type: 'Package',
+    category: 'Age-Specific Package',
     description: 'Tailored health screening for women above 40 including thyroid and metabolic evaluations.',
     parameters: ['FBS', 'PPBS', 'Lipid Profile', 'LFT', 'RFT', 'Calcium', 'CBC', 'Urine Routine', 'TFT', 'HbA1c']
   },
@@ -143,7 +157,8 @@ const diagnosticTests: DiagnosticTest[] = [
     name: 'Master Health Package (Male)',
     price: 1499,
     originalPrice: 4330,
-    category: 'Packages',
+    type: 'Package',
+    category: 'Master Package',
     description: 'Extensive health package covering diabetes, cardiac risks, bone health, and PSA screening for men.',
     parameters: ['FBS', 'PPBS', 'Lipid Profile', 'LFT', 'RFT', 'CBC', 'Urine Routine', 'PSA', 'Calcium', 'Sodium', 'Potassium', 'Urine Microalbumin', 'Vitamin D', 'HbA1c']
   },
@@ -152,7 +167,8 @@ const diagnosticTests: DiagnosticTest[] = [
     name: 'Master Health Package (Female)',
     price: 1499,
     originalPrice: 4330,
-    category: 'Packages',
+    type: 'Package',
+    category: 'Master Package',
     description: 'Extensive health package covering thyroid status, bone health, diabetes, and vital organ functions for women.',
     parameters: ['FBS', 'PPBS', 'Lipid Profile', 'LFT', 'RFT', 'CBC', 'Urine Routine', 'TFT', 'Calcium', 'Sodium', 'Potassium', 'Urine Microalbumin', 'Vitamin D', 'HbA1c']
   },
@@ -161,7 +177,8 @@ const diagnosticTests: DiagnosticTest[] = [
     name: 'Executive Health Package (Male)',
     price: 5999,
     originalPrice: 11000,
-    category: 'Packages',
+    type: 'Package',
+    category: 'Executive Package',
     description: 'Comprehensive elite wellness checkup covering all major biochemical, infection, cardiac, and vitamin markers.',
     parameters: [
       'Diabetes (FBS, PPBS, HbA1c)',
@@ -183,8 +200,9 @@ const diagnosticTests: DiagnosticTest[] = [
     name: 'Executive Health Package (Female)',
     price: 5999,
     originalPrice: 11000,
-    category: 'Packages',
-    description: 'Comprehensive elite wellness checkup tailored for women including complete thyroid profiling and multi-system diagnostics.',
+    type: 'Package',
+    category: 'Executive Package',
+    description: 'Comprehensive elite wellness checkup tailored for women including complete thyroid profiling.',
     parameters: [
       'Diabetes (FBS, PPBS, HbA1c)',
       'Lipid Profile & LFT (Full parameters)',
@@ -201,7 +219,8 @@ const diagnosticTests: DiagnosticTest[] = [
     name: 'PCOD Profile Test',
     price: 1999,
     originalPrice: 3000,
-    category: 'Packages',
+    type: 'Package',
+    category: 'Specialized Profile',
     description: 'Hormonal and metabolic assessment designed for PCOD/PCOS evaluation.',
     parameters: ['CBC', 'Insulin Fasting', 'LH', 'FSH', 'Testosterone', 'Prolactin', 'TSH']
   }
@@ -209,96 +228,123 @@ const diagnosticTests: DiagnosticTest[] = [
 
 export function TestsPage() {
   const [searchQuery, setSearchQuery] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState<string>('All');
+  const [activeTab, setActiveTab] = useState<'All' | 'Test' | 'Package'>('All');
 
-  const filteredTests = useMemo(() => {
-    return diagnosticTests.filter((test) => {
+  const filteredItems = useMemo(() => {
+    return allCatalogItems.filter((item) => {
       const matchesSearch = 
-        test.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        test.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        test.parameters.some(param => param.toLowerCase().includes(searchQuery.toLowerCase()));
+        item.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        item.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        item.category.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        item.parameters.some(param => param.toLowerCase().includes(searchQuery.toLowerCase()));
       
-      const matchesCategory = selectedCategory === 'All' || test.category === selectedCategory;
+      const matchesTab = activeTab === 'All' || item.type === activeTab;
 
-      return matchesSearch && matchesCategory;
+      return matchesSearch && matchesTab;
     });
-  }, [searchQuery, selectedCategory]);
+  }, [searchQuery, activeTab]);
 
   return (
-    <div className="min-h-screen bg-slate-50 py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-10">
-          <h1 className="text-3xl sm:text-4xl font-extrabold text-slate-900 mb-3">
-            Tests & Diagnostics
+    <div className="min-h-screen bg-slate-900 text-slate-100 pb-20">
+      {/* Hero Header */}
+      <div className="relative bg-gradient-to-r from-blue-900 via-indigo-950 to-slate-900 pt-16 pb-20 px-4 sm:px-6 lg:px-8 border-b border-slate-800 shadow-2xl overflow-hidden">
+        <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#3b82f6_1px,transparent_1px)] [background-size:16px_16px]"></div>
+        <div className="max-w-7xl mx-auto text-center relative z-10">
+          <span className="inline-block py-1 px-4 rounded-full bg-blue-500/10 text-blue-400 font-semibold text-xs tracking-wider uppercase mb-4 border border-blue-500/20 shadow-inner">
+            United Medilabs Catalog
+          </span>
+          <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight text-white mb-4">
+            Diagnostic Tests & <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-teal-300">Health Packages</span>
           </h1>
-          <p className="text-slate-600 max-w-2xl mx-auto">
-            Search and browse our complete catalog of diagnostic tests and health packages. Contact us for preparation instructions and turnaround times.
+          <p className="text-slate-400 max-w-2xl mx-auto text-base sm:text-lg mb-8">
+            Browse our complete range of precision diagnostic tests first, followed by our heavily discounted comprehensive health packages.
           </p>
-        </div>
 
-        <div className="max-w-3xl mx-auto mb-8">
-          <div className="relative">
-            <span className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-slate-400">
-              🔍
-            </span>
-            <input
-              type="text"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Search tests, packages, or parameters (e.g. CBC, Lipid, Diabetes)..."
-              className="w-full pl-11 pr-4 py-3 bg-white border border-slate-200 rounded-2xl shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-slate-800 placeholder-slate-400"
-            />
+          {/* Search Bar & Filters */}
+          <div className="max-w-3xl mx-auto space-y-4">
+            <div className="relative shadow-2xl">
+              <span className="absolute inset-y-0 left-0 pl-5 flex items-center pointer-events-none text-blue-400 text-lg">
+                🔍
+              </span>
+              <input
+                type="text"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                placeholder="Search test names (e.g., Test 1, CBC, Lipid, Complete Body Check-Up)..."
+                className="w-full pl-12 pr-6 py-4 bg-slate-800/90 backdrop-blur-md border border-slate-700 rounded-2xl text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all text-sm sm:text-base shadow-inner"
+              />
+            </div>
+
+            {/* Tabs */}
+            <div className="flex justify-center gap-2 pt-2">
+              {[
+                { label: 'All Catalog', value: 'All' },
+                { label: 'Individual Tests (1-9)', value: 'Test' },
+                { label: 'Health Packages', value: 'Package' },
+              ].map((tab) => (
+                <button
+                  key={tab.value}
+                  onClick={() => setActiveTab(tab.value as any)}
+                  className={`px-5 py-2.5 rounded-xl text-sm font-semibold transition-all duration-200 ${
+                    activeTab === tab.value
+                      ? 'bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-lg shadow-blue-500/25 ring-1 ring-blue-400/50'
+                      : 'bg-slate-800/80 text-slate-400 hover:bg-slate-700 hover:text-white border border-slate-700/60'
+                  }`}
+                >
+                  {tab.label}
+                </button>
+              ))}
+            </div>
           </div>
-
-          <div className="flex flex-wrap justify-center gap-2 mt-4">
-            {['All', 'Tests', 'Packages', 'Check-Up'].map((category) => (
-              <button
-                key={category}
-                onClick={() => setSelectedCategory(category)}
-                className={`px-4 py-2 rounded-xl text-sm font-medium transition-colors ${
-                  selectedCategory === category
-                    ? 'bg-blue-600 text-white shadow-sm'
-                    : 'bg-white text-slate-600 border border-slate-200 hover:bg-slate-100'
-                }`}
-              >
-                {category}
-              </button>
-            ))}
-          </div>
         </div>
+      </div>
 
-        {filteredTests.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {filteredTests.map((test) => (
+      {/* Grid Content */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-12">
+        {filteredItems.length > 0 ? (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {filteredItems.map((item) => (
               <div 
-                key={test.id} 
-                className="bg-white rounded-2xl border border-slate-200 shadow-card p-6 flex flex-col justify-between hover:shadow-float transition-shadow"
+                key={item.id} 
+                className="bg-slate-800/60 backdrop-blur-sm rounded-3xl border border-slate-700/80 p-6 flex flex-col justify-between hover:border-blue-500/50 hover:shadow-2xl hover:shadow-blue-500/10 transition-all duration-300 group"
               >
                 <div>
-                  <div className="flex justify-between items-start gap-4 mb-3">
-                    <span className="px-3 py-1 bg-blue-50 text-blue-700 text-xs font-semibold rounded-full">
-                      {test.category}
+                  <div className="flex justify-between items-start gap-3 mb-4">
+                    <span className={`px-3 py-1 text-xs font-bold rounded-full uppercase tracking-wider ${
+                      item.type === 'Test' 
+                        ? 'bg-blue-500/10 text-blue-400 border border-blue-500/20' 
+                        : 'bg-teal-500/10 text-teal-400 border border-teal-500/20'
+                    }`}>
+                      {item.category}
                     </span>
                     <div className="text-right">
-                      <span className="text-xl font-bold text-slate-900">₹{test.price}</span>
-                      {test.originalPrice && (
-                        <span className="block text-xs text-slate-400 line-through">₹{test.originalPrice}</span>
+                      <div className="text-2xl font-black text-white group-hover:text-blue-400 transition-colors">
+                        ₹{item.price}<span className="text-xs font-normal text-slate-400">/-</span>
+                      </div>
+                      {item.originalPrice && (
+                        <span className="text-xs text-rose-400 font-semibold line-through">
+                          ₹{item.originalPrice}/-
+                        </span>
                       )}
                     </div>
                   </div>
 
-                  <h3 className="text-lg font-bold text-slate-900 mb-2">{test.name}</h3>
-                  <p className="text-slate-600 text-sm mb-4">{test.description}</p>
+                  <h3 className="text-xl font-bold text-white mb-2 group-hover:text-blue-300 transition-colors">
+                    {item.name}
+                  </h3>
+                  <p className="text-slate-300 text-sm mb-6 leading-relaxed">
+                    {item.description}
+                  </p>
 
-                  <div className="border-t border-slate-100 pt-3 mb-4">
-                    <span className="text-xs font-semibold text-slate-500 uppercase tracking-wider block mb-2">
-                      Includes Parameters:
+                  <div className="border-t border-slate-700/60 pt-4 mb-6">
+                    <span className="text-xs font-bold text-slate-400 uppercase tracking-wider block mb-2.5 flex items-center gap-1.5">
+                      <span className="w-1.5 h-1.5 rounded-full bg-blue-400"></span> Included Parameters:
                     </span>
-                    <div className="flex flex-wrap gap-1">
-                      {test.parameters.map((param, idx) => (
+                    <div className="flex flex-wrap gap-1.5 max-h-36 overflow-y-auto pr-1 custom-scrollbar">
+                      {item.parameters.map((param, idx) => (
                         <span 
                           key={idx}
-                          className="px-2 py-0.5 bg-slate-100 text-slate-700 text-xs rounded-md"
+                          className="px-2.5 py-1 bg-slate-900/80 text-slate-300 text-xs rounded-lg border border-slate-700/50"
                         >
                           {param}
                         </span>
@@ -308,19 +354,19 @@ export function TestsPage() {
                 </div>
 
                 <button 
-                  onClick={() => alert(`Booking inquiry for: ${test.name}`)}
-                  className="w-full py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-xl transition-colors text-sm shadow-sm"
+                  onClick={() => alert(`Booking appointment inquiry for: ${item.name} (₹${item.price})`)}
+                  className="w-full py-3 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-semibold rounded-2xl transition-all duration-200 text-sm shadow-lg shadow-blue-600/20 active:scale-[0.98]"
                 >
-                  Book Test
+                  Book {item.type} Now
                 </button>
               </div>
             ))}
           </div>
         ) : (
-          <div className="text-center py-16">
-            <div className="text-4xl mb-3">📭</div>
-            <h3 className="text-lg font-semibold text-slate-800">No tests found</h3>
-            <p className="text-slate-500 text-sm mt-1">Try adjusting your search query or category filter.</p>
+          <div className="text-center py-24 bg-slate-800/40 rounded-3xl border border-slate-800 max-w-lg mx-auto">
+            <div className="text-5xl mb-4">🔍</div>
+            <h3 className="text-xl font-bold text-white mb-2">No matching tests or packages found</h3>
+            <p className="text-slate-400 text-sm px-6">Try refining your search keyword or selecting a different catalog tab.</p>
           </div>
         )}
       </div>
