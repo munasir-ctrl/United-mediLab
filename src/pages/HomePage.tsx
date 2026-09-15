@@ -10,9 +10,7 @@ import {
   HeartPulse, 
   Truck, 
   PhoneCall, 
-  Activity, 
   ArrowRight,
-  Percent,
   Flame,
   TestTube2
 } from 'lucide-react';
@@ -20,16 +18,17 @@ import {
 export function HomePage() {
   const [openFaq, setOpenFaq] = useState<number | null>(0);
 
+  // Verified package prices from official clinic promotional assets
   const promotionalPackages = [
-    { id: 1, name: 'Comprehensive Full Body Checkup', price: '₹2,999', originalPrice: '₹6,999', tests: 75, discount: '57% OFF', tag: 'Most Popular' },
-    { id: 2, name: 'Advanced Cardiac Health Panel', price: '₹3,999', originalPrice: '₹8,500', tests: 45, discount: '53% OFF', tag: 'Best Value' },
-    { id: 3, name: 'Vitamin & Vital Screening', price: '₹1,999', originalPrice: '₹4,500', tests: 25, discount: '55% OFF', tag: 'Essential' },
+    { id: 1, name: 'Complete Body Check-Up', price: '₹999', originalPrice: '₹4,999', tests: 75, discount: '80% OFF', tag: 'Most Popular' },
+    { id: 2, name: 'Advanced Health Screening (Test 9)', price: '₹2,999', originalPrice: '₹5,999', tests: 45, discount: '50% OFF', tag: 'Best Value' },
+    { id: 3, name: 'Comprehensive Panel (Test 8)', price: '₹2,499', originalPrice: '₹4,999', tests: 35, discount: '50% OFF', tag: 'Essential' },
   ];
 
   const diagnosticServices = [
-    { title: 'Pathology & Blood Tests', desc: 'Precise biochemical, hormonal, and hematological testing using fully automated analyzers.', icon: Activity },
+    { title: 'Pathology & Blood Tests', desc: 'Precise biochemical, hormonal, and hematological testing using fully automated analyzers.', icon: TestTube2 },
     { title: 'Home Sample Collection', desc: 'Certified and hygienic phlebotomists collecting samples safely from your doorstep.', icon: Truck },
-    { title: 'Rapid Diagnostic Panels', desc: 'Targeted screening profiles for diabetes, thyroid, cardiac markers, and vitamins.', icon: TestTube2 },
+    { title: 'Rapid Diagnostic Panels', desc: 'Targeted screening profiles for diabetes, thyroid, cardiac markers, and vitamins.', icon: HeartPulse },
     { title: 'Secure Digital Reports', desc: 'Encrypted, easy-to-read PDF reports delivered directly to your portal within 24 hours.', icon: FileText },
   ];
 
@@ -62,9 +61,9 @@ export function HomePage() {
           transition={{ repeat: Infinity, duration: 1.5 }}
           className="flex items-center gap-1 bg-white/20 px-2 py-0.5 rounded-full text-amber-300 font-bold"
         >
-          <Flame className="h-4 w-4 fill-amber-300" /> FLASH SALE
+          <Flame className="h-4 w-4 fill-amber-300" /> SPECIAL OFFER
         </motion.div>
-        <span>Get up to <strong className="underline text-amber-300 font-extrabold">60% OFF</strong> on Advanced Lab Test Packages + Free Home Collection!</span>
+        <span>Complete Body Check-Up for only <strong className="underline text-amber-300 font-extrabold">₹999</strong> + Free Home Collection!</span>
       </motion.div>
 
       {/* 2. HERO SECTION WITH DYNAMIC ANIMATIONS */}
@@ -95,7 +94,7 @@ export function HomePage() {
                 transition={{ repeat: Infinity, duration: 2, repeatType: "reverse" }}
                 className="inline-flex items-center gap-2 rounded-full bg-cyan-50 px-3.5 py-1.5 text-xs font-bold text-cyan-700 sm:text-sm border border-cyan-200"
               >
-                <Sparkles className="h-4 w-4 text-cyan-600 animate-spin" /> United Medilab Diagnostics
+                <Sparkles className="h-4 w-4 text-cyan-600 animate-spin" /> United Mediclinic Diagnostics
               </motion.div>
               
               <h1 className="mt-4 text-4xl font-extrabold tracking-tight text-slate-900 sm:text-5xl lg:text-6xl">
@@ -169,7 +168,7 @@ export function HomePage() {
                   transition={{ repeat: Infinity, duration: 3, ease: "easeInOut" }}
                   className="absolute -top-4 -right-4 rounded-2xl bg-gradient-to-r from-amber-500 to-orange-500 px-4 py-2 text-white font-bold text-sm shadow-lg flex items-center gap-1.5"
                 >
-                  <Percent className="h-4 w-4" /> Save up to 60% Today
+                  <Flame className="h-4 w-4" /> Full Body Checkup @ ₹999
                 </motion.div>
               </div>
             </motion.div>
@@ -249,7 +248,7 @@ export function HomePage() {
               Special Discounts
             </motion.span>
             <h2 className="mt-3 text-3xl font-extrabold text-slate-900 sm:text-4xl">Featured Diagnostic Packages</h2>
-            <p className="mt-2 text-slate-600 max-w-xl mx-auto">Book high-precision health screening profiles with limited-time promotional pricing.</p>
+            <p className="mt-2 text-slate-600 max-w-xl mx-auto">Book high-precision health screening profiles with official promotional pricing.</p>
           </div>
 
           <div className="mt-12 grid gap-8 md:grid-cols-3">
@@ -282,7 +281,7 @@ export function HomePage() {
 
                   <h3 className="mt-5 text-xl font-extrabold text-slate-900 group-hover:text-cyan-600 transition-colors">{pkg.name}</h3>
                   <p className="mt-2 text-xs font-medium text-slate-500 flex items-center gap-1.5">
-                    <TestTube2 className="h-4 w-4 text-cyan-600" /> Includes {pkg.tests} essential health parameters
+                    <TestTube2 className="h-4 w-4 text-cyan-600" /> Includes comprehensive parameters
                   </p>
                 </div>
                 
