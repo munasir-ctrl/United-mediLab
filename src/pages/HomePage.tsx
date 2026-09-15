@@ -12,7 +12,7 @@ import {
   PhoneCall 
 } from 'lucide-react';
 
-export default function HomePage() {
+export function HomePage() {
   const [openFaq, setOpenFaq] = useState<number | null>(0);
 
   const promotionalPackages = [
