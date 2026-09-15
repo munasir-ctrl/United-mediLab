@@ -1,28 +1,20 @@
-'use client';
-
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { motion } from 'framer-motion';
-import Link from 'next/link';
+import { Link } from 'react-router-dom';
 import { 
   ShieldCheck, 
   Clock, 
-  MapPin, 
-  PhoneCall, 
   FileText, 
-  Activity, 
   Sparkles, 
   ChevronRight, 
-  CheckCircle2, 
   HeartPulse, 
-  Stethoscope, 
   Truck, 
-  Star 
+  PhoneCall 
 } from 'lucide-react';
 
 export default function HomePage() {
   const [openFaq, setOpenFaq] = useState<number | null>(0);
 
-  // Sample mock data (replace with your data service imports as needed)
   const promotionalPackages = [
     { id: 1, name: 'Comprehensive Full Body Checkup', price: 'AED 299', originalPrice: 'AED 699', tests: 75, discount: '57% OFF' },
     { id: 2, name: 'Advanced Cardiac Health Panel', price: 'AED 399', originalPrice: 'AED 850', tests: 45, discount: '53% OFF' },
@@ -76,32 +68,17 @@ export default function HomePage() {
               
               <div className="mt-8 flex flex-wrap gap-4">
                 <Link 
-                  href="/packages" 
+                  to="/packages" 
                   className="flex items-center gap-2 rounded-xl bg-cyan-600 px-6 py-3.5 font-semibold text-white shadow-lg shadow-cyan-600/30 transition-all hover:bg-cyan-700"
                 >
                   Explore Packages <ChevronRight className="h-4 w-4" />
                 </Link>
                 <Link 
-                  href="/report-portal" 
+                  to="/patient-reports" 
                   className="flex items-center gap-2 rounded-xl border border-slate-300 bg-white px-6 py-3.5 font-semibold text-slate-700 shadow-sm transition-all hover:bg-slate-50"
                 >
                   <FileText className="h-4 w-4 text-cyan-600" /> Download Reports
                 </Link>
-              </div>
-
-              <div className="mt-10 grid grid-cols-3 gap-4 border-t border-slate-100 pt-6">
-                <div>
-                  <p className="text-2xl font-bold text-slate-900">100%</p>
-                  <p className="text-xs text-slate-500">Accurate Results</p>
-                </div>
-                <div>
-                  <p className="text-2xl font-bold text-slate-900">24/7</p>
-                  <p className="text-xs text-slate-500">Support Available</p>
-                </div>
-                <div>
-                  <p className="text-2xl font-bold text-slate-900">Free</p>
-                  <p className="text-xs text-slate-500">Home Sample Pickup</p>
-                </div>
               </div>
             </motion.div>
 
@@ -180,7 +157,7 @@ export default function HomePage() {
                 </div>
 
                 <Link 
-                  href={`/packages/${pkg.id}`}
+                  to="/packages"
                   className="mt-6 block w-full rounded-xl bg-slate-900 py-3 text-center text-sm font-semibold text-white transition-all hover:bg-cyan-600"
                 >
                   Book Package
