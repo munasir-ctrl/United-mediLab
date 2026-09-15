@@ -8,7 +8,7 @@ export function Logo({ className, variant = 'default' }: { className?: string; v
         src="/logo.png"
         alt="United MediLab"
         className={cn(
-          'h-12 w-auto object-contain transition-opacity', // Increased height from h-10 to h-12
+          'h-14 w-auto max-w-[160px] object-contain transition-opacity', // Increased height to h-14 and set max-width
           variant === 'light' ? 'brightness-0 invert' : ''
         )}
       />
