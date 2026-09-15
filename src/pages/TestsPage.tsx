@@ -246,24 +246,24 @@ export function TestsPage() {
 
   return (
     <div className="min-h-screen bg-slate-900 text-slate-100 pb-20">
-      {/* Hero Header */}
-      <div className="relative bg-gradient-to-r from-blue-900 via-indigo-950 to-slate-900 pt-16 pb-20 px-4 sm:px-6 lg:px-8 border-b border-slate-800 shadow-2xl overflow-hidden">
-        <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#3b82f6_1px,transparent_1px)] [background-size:16px_16px]"></div>
+      {/* Hero Header themed with Logo Blue & Teal */}
+      <div className="relative bg-gradient-to-r from-[#005288] via-[#0072bc] to-[#00a88f] pt-16 pb-20 px-4 sm:px-6 lg:px-8 border-b border-teal-500/20 shadow-2xl overflow-hidden">
+        <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:16px_16px]"></div>
         <div className="max-w-7xl mx-auto text-center relative z-10">
-          <span className="inline-block py-1 px-4 rounded-full bg-blue-500/10 text-blue-400 font-semibold text-xs tracking-wider uppercase mb-4 border border-blue-500/20 shadow-inner">
+          <span className="inline-block py-1 px-4 rounded-full bg-white/10 text-white font-semibold text-xs tracking-wider uppercase mb-4 border border-white/20 shadow-inner">
             United Medilabs Catalog
           </span>
           <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight text-white mb-4">
-            Diagnostic Tests & <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-teal-300">Health Packages</span>
+            Diagnostic Tests & <span className="text-teal-200">Health Packages</span>
           </h1>
-          <p className="text-slate-400 max-w-2xl mx-auto text-base sm:text-lg mb-8">
+          <p className="text-blue-100 max-w-2xl mx-auto text-base sm:text-lg mb-8">
             Browse our complete range of precision diagnostic tests first, followed by our heavily discounted comprehensive health packages.
           </p>
 
           {/* Search Bar & Filters */}
           <div className="max-w-3xl mx-auto space-y-4">
             <div className="relative shadow-2xl">
-              <span className="absolute inset-y-0 left-0 pl-5 flex items-center pointer-events-none text-blue-400 text-lg">
+              <span className="absolute inset-y-0 left-0 pl-5 flex items-center pointer-events-none text-teal-300 text-lg">
                 🔍
               </span>
               <input
@@ -271,7 +271,7 @@ export function TestsPage() {
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Search test names (e.g., Test 1, CBC, Lipid, Complete Body Check-Up)..."
-                className="w-full pl-12 pr-6 py-4 bg-slate-800/90 backdrop-blur-md border border-slate-700 rounded-2xl text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all text-sm sm:text-base shadow-inner"
+                className="w-full pl-12 pr-6 py-4 bg-slate-900/90 backdrop-blur-md border border-teal-500/30 rounded-2xl text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-teal-400 focus:border-teal-400 transition-all text-sm sm:text-base shadow-inner"
               />
             </div>
 
@@ -287,8 +287,8 @@ export function TestsPage() {
                   onClick={() => setActiveTab(tab.value as any)}
                   className={`px-5 py-2.5 rounded-xl text-sm font-semibold transition-all duration-200 ${
                     activeTab === tab.value
-                      ? 'bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-lg shadow-blue-500/25 ring-1 ring-blue-400/50'
-                      : 'bg-slate-800/80 text-slate-400 hover:bg-slate-700 hover:text-white border border-slate-700/60'
+                      ? 'bg-white text-[#005288] shadow-lg ring-2 ring-teal-300'
+                      : 'bg-slate-900/60 text-slate-300 hover:bg-slate-800 hover:text-white border border-white/10'
                   }`}
                 >
                   {tab.label}
@@ -306,19 +306,19 @@ export function TestsPage() {
             {filteredItems.map((item) => (
               <div 
                 key={item.id} 
-                className="bg-slate-800/60 backdrop-blur-sm rounded-3xl border border-slate-700/80 p-6 flex flex-col justify-between hover:border-blue-500/50 hover:shadow-2xl hover:shadow-blue-500/10 transition-all duration-300 group"
+                className="bg-slate-800/60 backdrop-blur-sm rounded-3xl border border-slate-700/80 p-6 flex flex-col justify-between hover:border-[#00a88f] hover:shadow-2xl hover:shadow-[#00a88f]/10 transition-all duration-300 group"
               >
                 <div>
                   <div className="flex justify-between items-start gap-3 mb-4">
                     <span className={`px-3 py-1 text-xs font-bold rounded-full uppercase tracking-wider ${
                       item.type === 'Test' 
-                        ? 'bg-blue-500/10 text-blue-400 border border-blue-500/20' 
-                        : 'bg-teal-500/10 text-teal-400 border border-teal-500/20'
+                        ? 'bg-[#0072bc]/20 text-blue-300 border border-[#0072bc]/40' 
+                        : 'bg-[#00a88f]/20 text-teal-300 border border-[#00a88f]/40'
                     }`}>
                       {item.category}
                     </span>
                     <div className="text-right">
-                      <div className="text-2xl font-black text-white group-hover:text-blue-400 transition-colors">
+                      <div className="text-2xl font-black text-white group-hover:text-teal-300 transition-colors">
                         ₹{item.price}<span className="text-xs font-normal text-slate-400">/-</span>
                       </div>
                       {item.originalPrice && (
@@ -329,7 +329,7 @@ export function TestsPage() {
                     </div>
                   </div>
 
-                  <h3 className="text-xl font-bold text-white mb-2 group-hover:text-blue-300 transition-colors">
+                  <h3 className="text-xl font-bold text-white mb-2 group-hover:text-teal-200 transition-colors">
                     {item.name}
                   </h3>
                   <p className="text-slate-300 text-sm mb-6 leading-relaxed">
@@ -338,7 +338,7 @@ export function TestsPage() {
 
                   <div className="border-t border-slate-700/60 pt-4 mb-6">
                     <span className="text-xs font-bold text-slate-400 uppercase tracking-wider block mb-2.5 flex items-center gap-1.5">
-                      <span className="w-1.5 h-1.5 rounded-full bg-blue-400"></span> Included Parameters:
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#00a88f]"></span> Included Parameters:
                     </span>
                     <div className="flex flex-wrap gap-1.5 max-h-36 overflow-y-auto pr-1 custom-scrollbar">
                       {item.parameters.map((param, idx) => (
@@ -355,7 +355,7 @@ export function TestsPage() {
 
                 <button 
                   onClick={() => alert(`Booking appointment inquiry for: ${item.name} (₹${item.price})`)}
-                  className="w-full py-3 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-semibold rounded-2xl transition-all duration-200 text-sm shadow-lg shadow-blue-600/20 active:scale-[0.98]"
+                  className="w-full py-3 bg-gradient-to-r from-[#0072bc] to-[#00a88f] hover:from-[#005288] hover:to-[#008f79] text-white font-semibold rounded-2xl transition-all duration-200 text-sm shadow-lg shadow-[#0072bc]/30 active:scale-[0.98]"
                 >
                   Book {item.type} Now
                 </button>
