@@ -14,7 +14,6 @@ import {
   ArrowRight,
   Percent,
   Flame,
-  CheckCircle2,
   TestTube2
 } from 'lucide-react';
 
@@ -22,9 +21,9 @@ export function HomePage() {
   const [openFaq, setOpenFaq] = useState<number | null>(0);
 
   const promotionalPackages = [
-    { id: 1, name: 'Comprehensive Full Body Checkup', price: 'AED 299', originalPrice: 'AED 699', tests: 75, discount: '57% OFF', tag: 'Most Popular' },
-    { id: 2, name: 'Advanced Cardiac Health Panel', price: 'AED 399', originalPrice: 'AED 850', tests: 45, discount: '53% OFF', tag: 'Best Value' },
-    { id: 3, name: 'Vitamin & Vital Screening', price: 'AED 199', originalPrice: 'AED 450', tests: 25, discount: '55% OFF', tag: 'Essential' },
+    { id: 1, name: 'Comprehensive Full Body Checkup', price: '₹2,999', originalPrice: '₹6,999', tests: 75, discount: '57% OFF', tag: 'Most Popular' },
+    { id: 2, name: 'Advanced Cardiac Health Panel', price: '₹3,999', originalPrice: '₹8,500', tests: 45, discount: '53% OFF', tag: 'Best Value' },
+    { id: 3, name: 'Vitamin & Vital Screening', price: '₹1,999', originalPrice: '₹4,500', tests: 25, discount: '55% OFF', tag: 'Essential' },
   ];
 
   const diagnosticServices = [
