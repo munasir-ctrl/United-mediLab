@@ -1,385 +1,233 @@
-import { useState } from 'react';
-import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { 
-  ShieldCheck, 
-  Clock, 
-  FileText, 
-  Sparkles, 
-  ChevronRight, 
-  HeartPulse, 
-  Truck, 
-  PhoneCall, 
-  ArrowRight,
-  Flame,
-  TestTube2
-} from 'lucide-react';
+import { motion } from 'framer-motion';
+import { MessageCircle, Star, ArrowRight, ShieldCheck, Clock, Award, Activity, PhoneCall } from 'lucide-react';
 
 export function HomePage() {
-  const [openFaq, setOpenFaq] = useState<number | null>(0);
-
-  // Verified package prices from official clinic promotional assets
-  const promotionalPackages = [
-    { id: 1, name: 'Complete Body Check-Up', price: '₹999', originalPrice: '₹4,999', tests: 75, discount: '80% OFF', tag: 'Most Popular' },
-    { id: 2, name: 'Advanced Health Screening (Test 9)', price: '₹2,999', originalPrice: '₹5,999', tests: 45, discount: '50% OFF', tag: 'Best Value' },
-    { id: 3, name: 'Comprehensive Panel (Test 8)', price: '₹2,499', originalPrice: '₹4,999', tests: 35, discount: '50% OFF', tag: 'Essential' },
-  ];
-
-  const diagnosticServices = [
-    { title: 'Pathology & Blood Tests', desc: 'Precise biochemical, hormonal, and hematological testing using fully automated analyzers.', icon: TestTube2 },
-    { title: 'Home Sample Collection', desc: 'Certified and hygienic phlebotomists collecting samples safely from your doorstep.', icon: Truck },
-    { title: 'Rapid Diagnostic Panels', desc: 'Targeted screening profiles for diabetes, thyroid, cardiac markers, and vitamins.', icon: HeartPulse },
-    { title: 'Secure Digital Reports', desc: 'Encrypted, easy-to-read PDF reports delivered directly to your portal within 24 hours.', icon: FileText },
-  ];
-
-  const steps = [
-    { step: '01', title: 'Select Test Package', desc: 'Choose from our extensive list of specialized diagnostic lab profiles.' },
-    { step: '02', title: 'Book Home Visit', desc: 'Schedule a free home sample collection at your preferred time slot.' },
-    { step: '03', title: 'Sample Processing', desc: 'Your sample is tested under strict quality controls in our certified lab.' },
-    { step: '04', title: 'Get Digital Results', desc: 'Access and download your verified reports instantly online.' },
-  ];
-
-  const faqs = [
-    { question: 'How do I book a home sample collection?', answer: 'You can easily book online through our portal or contact our customer support via phone or WhatsApp to schedule a preferred time slot.' },
-    { question: 'When will I receive my diagnostic test reports?', answer: 'Most routine blood test reports are available within 12 to 24 hours. Specialized tests may take up to 48 hours.' },
-    { question: 'Are your laboratories certified?', answer: 'Yes, our partner labs and diagnostic facilities adhere to the highest international quality standards and regulatory compliance.' },
-    { question: 'Do I need to fast before a blood test?', answer: 'Certain tests like lipid profiles or fasting blood glucose require 8-12 hours of fasting. Specific instructions are provided upon booking.' }
-  ];
+  const primaryNumber = "9539900049";
+  const whatsappMessage = encodeURIComponent("Hello United Medilabs, I would like to book a lab test or home sample collection.");
 
   return (
-    <div className="min-h-screen bg-[#FBFBFA] text-slate-900 overflow-x-hidden font-sans selection:bg-amber-100 selection:text-amber-900">
+    <div className="min-h-screen bg-white text-slate-900">
       
-      {/* 1. ANIMATED TOP FLASH OFFER BANNER */}
-      <motion.div 
-        initial={{ y: -50, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.5 }}
-        className="bg-gradient-to-r from-slate-900 via-navy-950 to-slate-900 px-4 py-3 text-center text-xs font-medium text-slate-200 sm:text-sm flex items-center justify-center gap-2 shadow-inner border-b border-amber-500/20 relative overflow-hidden"
-      >
-        <motion.div
-          animate={{ scale: [1, 1.15, 1] }}
-          transition={{ repeat: Infinity, duration: 1.8 }}
-          className="flex items-center gap-1.5 bg-amber-500/10 px-2.5 py-0.5 rounded-md text-amber-400 font-semibold border border-amber-500/30"
-        >
-          <Flame className="h-3.5 w-3.5 fill-amber-400 text-amber-400" /> SPECIAL OFFER
-        </motion.div>
-        <span>Complete Body Check-Up for only <strong className="underline decoration-amber-500 underline-offset-4 text-amber-400 font-bold">₹999</strong> + Free Home Collection!</span>
-      </motion.div>
+      {/* ==========================================
+          1. HERO SECTION (100% LABORATORY TAILORED)
+          ================================---------- */}
+      <section className="relative overflow-hidden bg-white pt-12 pb-24 lg:pt-20 lg:pb-32 border-b border-slate-100">
+        
+        {/* Subtle Background Glows matching the Blue & Teal Logo */}
+        <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-bl from-teal-50/50 via-blue-50/20 to-transparent pointer-events-none rounded-bl-[120px]" />
 
-      {/* 2. HERO SECTION WITH DYNAMIC ANIMATIONS */}
-      <section className="relative overflow-hidden bg-white py-20 lg:py-28 border-b border-slate-200/60">
-        {/* Subtle Classic Background Grid & Elements */}
-        <div className="pointer-events-none absolute inset-0 opacity-[0.03] bg-[radial-gradient(#0f172a_1px,transparent_1px)] [background-size:24px_24px]" />
-
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="grid items-center gap-12 lg:grid-cols-2">
+        <div className="container-page relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+            
+            {/* Left Column: Lab-Specific Typography & Buttons */}
             <motion.div 
-              initial={{ opacity: 0, x: -30 }} 
-              animate={{ opacity: 1, x: 0 }} 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
+              className="lg:col-span-7 space-y-6 text-left"
             >
-              <motion.div 
-                initial={{ scale: 0.95 }}
-                animate={{ scale: 1 }}
-                transition={{ repeat: Infinity, duration: 2.5, repeatType: "reverse" }}
-                className="inline-flex items-center gap-2 rounded-md bg-amber-50 px-3.5 py-1.5 text-xs font-semibold text-amber-900 sm:text-sm border border-amber-200/80 shadow-sm"
-              >
-                <Sparkles className="h-4 w-4 text-amber-600" /> United Mediclinic Diagnostics
-              </motion.div>
-              
-              <h1 className="mt-6 text-4xl font-serif font-bold tracking-tight text-slate-900 sm:text-5xl lg:text-6xl leading-[1.15]">
-                Precision <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-700 to-amber-600">Lab Testing</span> & Diagnostics at Your Doorstep
+              {/* Logo / Brand Badge */}
+              <div className="inline-flex items-center gap-2 rounded-full bg-slate-100 px-4 py-1.5 text-xs font-semibold text-[#0077b6] border border-slate-200">
+                <span>UNITED MEDILABS &amp; DIAGNOSTICS</span>
+              </div>
+
+              {/* Main Title with Serif Typography */}
+              <h1 className="text-4xl sm:text-6xl font-serif font-normal tracking-wide leading-[1.15] text-slate-900">
+                ADVANCED LAB TESTING <br />
+                <span className="font-serif italic font-light text-[#00a884]">
+                  &amp; Diagnostics
+                </span>
               </h1>
-              
-              <p className="mt-6 text-lg text-slate-600 font-normal leading-relaxed">
-                Accurate pathology results, specialized biomarker panels, and free hygienic sample collection backed by advanced laboratory infrastructure.
+
+              {/* Subtitle Message */}
+              <p className="text-base sm:text-lg text-slate-600 max-w-xl font-light leading-relaxed">
+                Precision pathology testing, specialized biomarker panels, and certified sample analysis designed for accurate diagnosis and absolute peace of mind.
               </p>
-              
-              <div className="mt-8 flex flex-wrap gap-4">
-                <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
-                  <Link 
-                    to="/packages" 
-                    className="flex items-center gap-2 rounded-xl bg-slate-900 px-7 py-4 font-medium text-white shadow-xl shadow-slate-900/10 transition-all hover:bg-slate-800 border border-slate-800"
-                  >
-                    Explore Lab Packages <ChevronRight className="h-4 w-4 text-amber-400" />
-                  </Link>
-                </motion.div>
 
-                <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
-                  <Link 
-                    to="/reports" 
-                    className="flex items-center gap-2 rounded-xl border border-slate-300 bg-white px-7 py-4 font-medium text-slate-700 shadow-sm transition-all hover:bg-slate-50 hover:border-slate-400"
-                  >
-                    <FileText className="h-4 w-4 text-amber-600" /> Download Reports
-                  </Link>
-                </motion.div>
+              {/* Pricing Highlight */}
+              <div className="pt-2">
+                <p className="text-sm font-medium text-slate-700">
+                  Complete Health Check-Up starts from <span className="text-2xl font-bold text-[#0077b6]">₹999</span>
+                </p>
               </div>
 
-              <div className="mt-12 grid grid-cols-3 gap-6 border-t border-slate-200/80 pt-6">
-                <div>
-                  <p className="text-3xl font-serif font-bold text-slate-900">100<span className="text-amber-600">%</span></p>
-                  <p className="text-xs text-slate-500 font-medium mt-0.5 uppercase tracking-wider">Quality Assured</p>
+              {/* Google Reviews Badge */}
+              <div className="flex items-center gap-2 pt-1">
+                <span className="text-xs font-semibold uppercase tracking-wider text-slate-500">Google Reviews</span>
+                <div className="flex items-center gap-1 text-amber-400">
+                  <Star className="h-4 w-4 fill-amber-400" />
+                  <Star className="h-4 w-4 fill-amber-400" />
+                  <Star className="h-4 w-4 fill-amber-400" />
+                  <Star className="h-4 w-4 fill-amber-400" />
+                  <Star className="h-4 w-4 fill-amber-400" />
                 </div>
-                <div>
-                  <p className="text-3xl font-serif font-bold text-slate-900">24<span className="text-amber-600">H</span></p>
-                  <p className="text-xs text-slate-500 font-medium mt-0.5 uppercase tracking-wider">Fast Digital Reports</p>
-                </div>
-                <div>
-                  <p className="text-3xl font-serif font-bold text-slate-900">Free</p>
-                  <p className="text-xs text-slate-500 font-medium mt-0.5 uppercase tracking-wider">Home Phlebotomy</p>
-                </div>
+                <span className="text-xs font-bold text-slate-800">5.0</span>
               </div>
+
+              {/* Action Buttons */}
+              <div className="pt-4 flex flex-wrap items-center gap-4">
+                <Link 
+                  to="/packages" 
+                  className="inline-flex items-center gap-2 rounded-full bg-[#0077b6] px-8 py-4 text-sm font-bold text-white shadow-lg shadow-[#0077b6]/20 hover:bg-[#005f93] transition-all transform hover:-translate-y-0.5"
+                >
+                  Book Lab Test
+                  <ArrowRight className="h-4 w-4" />
+                </Link>
+
+                <a 
+                  href={`https://wa.me/91${primaryNumber}?text=${whatsappMessage}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 rounded-full bg-slate-100 px-6 py-4 text-sm font-semibold text-slate-800 border border-slate-200 hover:bg-slate-200 transition-all"
+                >
+                  <MessageCircle className="h-4 w-4 text-[#00a884]" />
+                  WhatsApp Us
+                </a>
+
+                <a 
+                  href={`tel:+91${primaryNumber}`}
+                  className="inline-flex items-center gap-2 rounded-full bg-white px-6 py-4 text-sm font-semibold text-slate-700 border border-slate-200 hover:text-slate-900 transition-all shadow-sm"
+                >
+                  <PhoneCall className="h-4 w-4 text-[#0077b6]" />
+                  Call Lab
+                </a>
+              </div>
+
             </motion.div>
 
-            {/* Animated Hero Card / Visual Element */}
+            {/* Right Column: Circular Lab Equipment Frame */}
             <motion.div 
-              initial={{ opacity: 0, scale: 0.95 }} 
-              animate={{ opacity: 1, scale: 1 }} 
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="relative lg:h-[480px] flex items-center justify-center"
+              className="lg:col-span-5 relative flex justify-center lg:justify-end"
             >
-              <div className="relative h-full w-full rounded-3xl bg-gradient-to-b from-slate-900 via-slate-900 to-slate-950 p-10 border border-slate-800 flex flex-col justify-center items-center text-center shadow-2xl overflow-hidden">
-                
-                {/* Subtle internal aura */}
-                <div className="absolute -top-24 -right-24 w-72 h-72 bg-amber-500/10 rounded-full blur-3xl pointer-events-none" />
-                <div className="absolute -bottom-24 -left-24 w-72 h-72 bg-blue-500/10 rounded-full blur-3xl pointer-events-none" />
-
-                {/* Glowing Pulsing Icon */}
-                <motion.div 
-                  animate={{ scale: [1, 1.05, 1] }}
-                  transition={{ repeat: Infinity, duration: 4 }}
-                  className="rounded-2xl bg-white/5 p-6 mb-6 text-amber-400 border border-white/10 shadow-inner"
-                >
-                  <HeartPulse className="h-16 w-16 animate-pulse" />
-                </motion.div>
-
-                <h3 className="text-2xl font-serif font-bold text-white tracking-wide">Advanced Pathology Lab</h3>
-                <p className="text-sm text-slate-400 max-w-sm mt-3 leading-relaxed">Equipped with state-of-the-art diagnostic machinery for zero-error clinical testing.</p>
-
-                {/* Floating Animated Discount Badge */}
-                <motion.div 
-                  animate={{ y: [-4, 4, -4] }}
-                  transition={{ repeat: Infinity, duration: 3.5, ease: "easeInOut" }}
-                  className="absolute -top-3 -right-3 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 px-4 py-2.5 text-slate-950 font-bold text-xs shadow-xl flex items-center gap-1.5 border border-amber-400/40"
-                >
-                  <Flame className="h-4 w-4 fill-slate-950" /> Full Body Checkup @ ₹999
-                </motion.div>
+              <div className="relative w-[300px] h-[300px] sm:w-[380px] sm:h-[380px] lg:w-[430px] lg:h-[430px] rounded-full overflow-hidden shadow-2xl bg-slate-100 border-4 border-[#00a884]/30">
+                <img 
+                  src="https://images.unsplash.com/photo-1579165466741-7f35e4755660?auto=format&fit=crop&w=900&q=80" 
+                  alt="Laboratory Testing and Pathology Equipment" 
+                  className="h-full w-full object-cover object-center"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent" />
               </div>
             </motion.div>
+
           </div>
         </div>
       </section>
 
-      {/* 3. TRUST INDICATORS */}
-      <section className="bg-slate-900 py-10 text-white border-y border-slate-800">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
-            <div className="flex items-center gap-4">
-              <div className="p-2.5 rounded-xl bg-white/5 border border-white/10 text-amber-400">
-                <ShieldCheck className="h-6 w-6" />
-              </div>
-              <div>
-                <h4 className="font-semibold text-sm tracking-wide text-white">Certified Lab</h4>
-                <p className="text-xs text-slate-400 mt-0.5">Accredited diagnostics</p>
-              </div>
+      {/* ==========================================
+          2. QUALITY & LAB ASSURANCE METRICS BAR 
+          ================================---------- */}
+      <section className="py-12 bg-slate-50 border-b border-slate-200">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 text-center">
+            <div className="p-6 rounded-2xl bg-white border border-slate-200 shadow-sm">
+              <Award className="h-8 w-8 text-[#0077b6] mx-auto mb-3" />
+              <h3 className="font-bold text-lg text-slate-900 mb-2">100% Quality Assured</h3>
+              <p className="text-sm text-slate-600">Advanced diagnostic machinery engineered for zero-error clinical testing.</p>
             </div>
-            <div className="flex items-center gap-4">
-              <div className="p-2.5 rounded-xl bg-white/5 border border-white/10 text-amber-400">
-                <Truck className="h-6 w-6" />
-              </div>
-              <div>
-                <h4 className="font-semibold text-sm tracking-wide text-white">Home Collection</h4>
-                <p className="text-xs text-slate-400 mt-0.5">Hygienic and safe</p>
-              </div>
+            <div className="p-6 rounded-2xl bg-white border border-slate-200 shadow-sm">
+              <Clock className="h-8 w-8 text-[#00a884] mx-auto mb-3" />
+              <h3 className="font-bold text-lg text-slate-900 mb-2">24H Fast Reports</h3>
+              <p className="text-sm text-slate-600">Receive accurate pathology results directly on your digital devices quickly.</p>
             </div>
-            <div className="flex items-center gap-4">
-              <div className="p-2.5 rounded-xl bg-white/5 border border-white/10 text-amber-400">
-                <Clock className="h-6 w-6" />
-              </div>
-              <div>
-                <h4 className="font-semibold text-sm tracking-wide text-white">Quick Turnaround</h4>
-                <p className="text-xs text-slate-400 mt-0.5">Results in 12-24 hours</p>
-              </div>
-            </div>
-            <div className="flex items-center gap-4">
-              <div className="p-2.5 rounded-xl bg-white/5 border border-white/10 text-amber-400">
-                <PhoneCall className="h-6 w-6" />
-              </div>
-              <div>
-                <h4 className="font-semibold text-sm tracking-wide text-white">Support 24/7</h4>
-                <p className="text-xs text-slate-400 mt-0.5">Always available to help</p>
-              </div>
+            <div className="p-6 rounded-2xl bg-white border border-slate-200 shadow-sm">
+              <ShieldCheck className="h-8 w-8 text-[#0077b6] mx-auto mb-3" />
+              <h3 className="font-bold text-lg text-slate-900 mb-2">Free Home Phlebotomy</h3>
+              <p className="text-sm text-slate-600">Hygienic, professional sample collection right at the comfort of your doorstep.</p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* 4. REPORT PORTAL QUICK ACCESS BANNER */}
-      <section className="bg-amber-50/50 py-12 border-b border-amber-100/60">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6">
-          <div className="flex items-center gap-5">
-            <div className="rounded-2xl bg-amber-500/10 border border-amber-500/20 p-4 text-amber-800 shadow-sm">
-              <FileText className="h-7 w-7" />
-            </div>
-            <div>
-              <h3 className="text-xl font-serif font-bold text-slate-900">Looking for your lab test results?</h3>
-              <p className="text-sm text-slate-600 mt-1">Access and download your digital diagnostic reports securely anytime.</p>
-            </div>
-          </div>
-          <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
-            <Link 
-              to="/reports"
-              className="flex items-center gap-2 rounded-xl bg-slate-900 px-7 py-3.5 text-sm font-medium text-white shadow-md transition-all hover:bg-slate-800"
-            >
-              Access Report Portal <ArrowRight className="h-4 w-4 text-amber-400" />
-            </Link>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* 5. ANIMATED FEATURED HEALTH PACKAGES GRID */}
-      <section className="py-24 bg-gradient-to-b from-[#FBFBFA] to-slate-100/50">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-2xl mx-auto">
-            <motion.span 
-              initial={{ opacity: 0, y: 10 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="inline-block rounded-md bg-amber-100/80 px-3.5 py-1 text-xs font-semibold text-amber-900 uppercase tracking-widest border border-amber-200"
-            >
-              Special Discounts
-            </motion.span>
-            <h2 className="mt-4 text-3xl font-serif font-bold text-slate-900 sm:text-4xl">Featured Diagnostic Packages</h2>
-            <p className="mt-3 text-slate-600">Book high-precision health screening profiles with official promotional pricing.</p>
+      {/* ==========================================
+          3. FEATURED LAB & HEALTH PACKAGES 
+          ================================---------- */}
+      <section className="py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center max-w-2xl mx-auto mb-16">
+            <span className="text-[#00a884] text-xs font-bold tracking-widest uppercase mb-2 block">Comprehensive Diagnostics</span>
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 mb-4">Featured Health Packages</h2>
+            <p className="text-slate-600 text-sm sm:text-base">Designed to screen vital organ health, early risk indicators, and overall wellness.</p>
           </div>
 
-          <div className="mt-16 grid gap-8 md:grid-cols-3">
-            {promotionalPackages.map((pkg, idx) => (
-              <motion.div 
-                key={pkg.id} 
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: idx * 0.15 }}
-                whileHover={{ y: -6, transition: { duration: 0.2 } }}
-                className="relative rounded-3xl border border-slate-200/80 bg-white p-8 shadow-xl shadow-slate-950/[0.03] flex flex-col justify-between overflow-hidden group"
-              >
-                {/* Subtle top accent border on hover */}
-                <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-amber-500 to-amber-600 opacity-0 group-hover:opacity-100 transition-opacity" />
-
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {/* Package Card 1 */}
+            <div className="bg-slate-50 rounded-3xl p-8 border border-slate-200 shadow-xl relative overflow-hidden flex flex-col justify-between">
+              <div>
+                <div className="flex items-center justify-between mb-6">
+                  <span className="inline-flex items-center gap-1.5 rounded-full bg-[#0077b6]/10 px-3 py-1 text-xs font-semibold text-[#0077b6] border border-[#0077b6]/20">
+                    <Activity className="h-3.5 w-3.5" /> Most Popular
+                  </span>
+                  <span className="text-xs text-slate-500">Full Body</span>
+                </div>
+                <h3 className="text-2xl font-bold text-slate-900 mb-3">Complete Body Check-Up</h3>
+                <p className="text-sm text-slate-600 mb-6 leading-relaxed">
+                  Extensive blood and organ profiling covering lipid levels, liver function, renal metrics, and vitamin profiles.
+                </p>
+              </div>
+              <div className="pt-6 border-t border-slate-200 flex items-center justify-between">
                 <div>
-                  <div className="flex items-center justify-between">
-                    <span className="rounded-md bg-slate-100 px-3 py-1 text-xs font-semibold text-slate-800 border border-slate-200">
-                      {pkg.tag}
-                    </span>
-                    <motion.span 
-                      animate={{ scale: [1, 1.05, 1] }}
-                      transition={{ repeat: Infinity, duration: 2.5 }}
-                      className="rounded-md bg-amber-500 px-2.5 py-1 text-xs font-bold text-slate-950 shadow-sm"
-                    >
-                      {pkg.discount}
-                    </motion.span>
-                  </div>
-
-                  <h3 className="mt-6 text-xl font-serif font-bold text-slate-900 group-hover:text-amber-700 transition-colors">{pkg.name}</h3>
-                  <p className="mt-2 text-xs font-medium text-slate-500 flex items-center gap-1.5">
-                    <TestTube2 className="h-4 w-4 text-amber-600" /> Includes comprehensive parameters
-                  </p>
+                  <p className="text-xs text-slate-500">Special Price</p>
+                  <p className="text-2xl font-extrabold text-[#0077b6]">₹999</p>
                 </div>
-                
-                <div className="mt-10 pt-6 border-t border-slate-100">
-                  <div className="flex items-baseline gap-2.5">
-                    <span className="text-3xl font-serif font-bold text-slate-900">{pkg.price}</span>
-                    <span className="text-sm text-slate-400 line-through font-medium">{pkg.originalPrice}</span>
-                  </div>
+                <Link to="/packages" className="inline-flex items-center gap-1.5 rounded-xl bg-[#0077b6] px-5 py-2.5 text-xs font-bold text-white hover:bg-[#005f93] transition-all">
+                  Book Package <ArrowRight className="h-3.5 w-3.5" />
+                </Link>
+              </div>
+            </div>
 
-                  <Link 
-                    to="/packages"
-                    className="mt-6 block w-full rounded-xl bg-slate-900 py-3.5 text-center text-sm font-medium text-white transition-all hover:bg-slate-800 shadow-md group-hover:shadow-lg"
-                  >
-                    Book Lab Package Now
-                  </Link>
+            {/* Package Card 2 */}
+            <div className="bg-slate-50 rounded-3xl p-8 border border-slate-200 shadow-xl relative overflow-hidden flex flex-col justify-between">
+              <div>
+                <div className="flex items-center justify-between mb-6">
+                  <span className="inline-flex items-center gap-1.5 rounded-full bg-[#00a884]/10 px-3 py-1 text-xs font-semibold text-[#00a884] border border-[#00a884]/20">
+                    <Activity className="h-3.5 w-3.5" /> Vital Screening
+                  </span>
+                  <span className="text-xs text-slate-500">Advanced</span>
                 </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* 6. DIAGNOSTIC SERVICES */}
-      <section className="bg-white py-24 border-t border-slate-200/60">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-2xl mx-auto">
-            <h2 className="text-3xl font-serif font-bold text-slate-900">Comprehensive Laboratory Services</h2>
-            <p className="mt-3 text-slate-600">Advanced diagnostic testing solutions tailored for precision and speed.</p>
-          </div>
-
-          <div className="mt-16 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
-            {diagnosticServices.map((srv, idx) => {
-              const Icon = srv.icon;
-              return (
-                <motion.div 
-                  key={idx} 
-                  whileHover={{ y: -4 }}
-                  className="rounded-2xl border border-slate-200/80 bg-[#FBFBFA] p-7 shadow-sm transition-all hover:shadow-md hover:border-slate-300 group"
-                >
-                  <div className="inline-block rounded-xl bg-white p-3.5 text-amber-700 shadow-sm border border-slate-200/60 group-hover:border-amber-500/30 transition-colors">
-                    <Icon className="h-6 w-6" />
-                  </div>
-                  <h3 className="mt-5 text-lg font-serif font-bold text-slate-900">{srv.title}</h3>
-                  <p className="mt-2.5 text-sm text-slate-600 leading-relaxed">{srv.desc}</p>
-                </motion.div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      {/* 7. HOW IT WORKS */}
-      <section className="py-24 bg-slate-50/50 border-t border-slate-200/60">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-2xl mx-auto">
-            <h2 className="text-3xl font-serif font-bold text-slate-900">How Home Sample Collection Works</h2>
-            <p className="mt-3 text-slate-600">Simple, sterile, and hassle-free testing steps right from your home.</p>
-          </div>
-
-          <div className="mt-16 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
-            {steps.map((st, i) => (
-              <div key={i} className="relative rounded-2xl border border-slate-200/80 bg-white p-8 text-center shadow-sm">
-                <span className="text-3xl font-serif font-bold text-amber-600/50">{st.step}</span>
-                <h3 className="mt-3 text-lg font-serif font-bold text-slate-900">{st.title}</h3>
-                <p className="mt-2.5 text-sm text-slate-600 leading-relaxed">{st.desc}</p>
+                <h3 className="text-2xl font-bold text-slate-900 mb-3">Advanced Cardiac &amp; Diabetes</h3>
+                <p className="text-sm text-slate-600 mb-6 leading-relaxed">
+                  Targeted analysis focusing on heart health indicators, HbA1c, lipid breakdown, and vascular risk assessment.
+                </p>
               </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* 8. FAQ SECTION */}
-      <section className="py-24 bg-white border-t border-slate-200/60">
-        <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
-          <div className="text-center">
-            <h2 className="text-3xl font-serif font-bold text-slate-900">Frequently Asked Questions</h2>
-            <p className="mt-3 text-slate-600">Got questions? We have answers regarding bookings and lab reports.</p>
-          </div>
-
-          <div className="mt-12 space-y-4">
-            {faqs.map((faq, idx) => (
-              <div key={idx} className="rounded-xl border border-slate-200/80 bg-[#FBFBFA] overflow-hidden transition-all">
-                <button 
-                  onClick={() => setOpenFaq(openFaq === idx ? null : idx)}
-                  className="flex w-full items-center justify-between p-5 font-semibold text-slate-900 text-left hover:bg-slate-100/50 transition-colors"
-                >
-                  <span className="font-serif text-base">{faq.question}</span>
-                  <span className="text-amber-700 font-bold text-xl ml-4">{openFaq === idx ? '−' : '+'}</span>
-                </button>
-                {openFaq === idx && (
-                  <p className="px-5 pb-5 text-sm text-slate-600 leading-relaxed border-t border-slate-200/60 pt-4 bg-white">
-                    {faq.answer}
-                  </p>
-                )}
+              <div className="pt-6 border-t border-slate-200 flex items-center justify-between">
+                <div>
+                  <p className="text-xs text-slate-500">Special Price</p>
+                  <p className="text-2xl font-extrabold text-[#00a884]">₹1,499</p>
+                </div>
+                <Link to="/packages" className="inline-flex items-center gap-1.5 rounded-xl bg-slate-900 px-5 py-2.5 text-xs font-bold text-white hover:bg-slate-800 transition-all">
+                  Book Package <ArrowRight className="h-3.5 w-3.5" />
+                </Link>
               </div>
-            ))}
+            </div>
+
+            {/* Package Card 3 */}
+            <div className="bg-slate-50 rounded-3xl p-8 border border-slate-200 shadow-xl relative overflow-hidden flex flex-col justify-between">
+              <div>
+                <div className="flex items-center justify-between mb-6">
+                  <span className="inline-flex items-center gap-1.5 rounded-full bg-[#0077b6]/10 px-3 py-1 text-xs font-semibold text-[#0077b6] border border-[#0077b6]/20">
+                    <Activity className="h-3.5 w-3.5" /> Essential
+                  </span>
+                  <span className="text-xs text-slate-500">Routine</span>
+                </div>
+                <h3 className="text-2xl font-bold text-slate-900 mb-3">Master Health Screening</h3>
+                <p className="text-sm text-slate-600 mb-6 leading-relaxed">
+                  Thorough preventative care panel including complete blood count, thyroid function tests, and urinalysis.
+                </p>
+              </div>
+              <div className="pt-6 border-t border-slate-200 flex items-center justify-between">
+                <div>
+                  <p className="text-xs text-slate-500">Special Price</p>
+                  <p className="text-2xl font-extrabold text-[#0077b6]">₹799</p>
+                </div>
+                <Link to="/packages" className="inline-flex items-center gap-1.5 rounded-xl bg-slate-900 px-5 py-2.5 text-xs font-bold text-white hover:bg-slate-800 transition-all">
+                  Book Package <ArrowRight className="h-3.5 w-3.5" />
+                </Link>
+              </div>
+            </div>
           </div>
         </div>
       </section>
