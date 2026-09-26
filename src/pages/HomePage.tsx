@@ -107,7 +107,7 @@ export function HomePage() {
 
                 <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
                   <Link 
-                    to="/patient-reports" 
+                    to="/reports" 
                     className="flex items-center gap-2 rounded-xl border border-slate-300 bg-white px-7 py-4 font-medium text-slate-700 shadow-sm transition-all hover:bg-slate-50 hover:border-slate-400"
                   >
                     <FileText className="h-4 w-4 text-amber-600" /> Download Reports
@@ -228,7 +228,7 @@ export function HomePage() {
           </div>
           <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
             <Link 
-              to="/patient-reports"
+              to="/reports"
               className="flex items-center gap-2 rounded-xl bg-slate-900 px-7 py-3.5 text-sm font-medium text-white shadow-md transition-all hover:bg-slate-800"
             >
               Access Report Portal <ArrowRight className="h-4 w-4 text-amber-400" />
