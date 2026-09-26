@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, FileSearch, CalendarPlus, Phone } from 'lucide-react';
 import { Logo } from '@/components/Logo';
 import { cn } from '@/lib/utils';
+import { QuickContactWidget } from '@/components/QuickContactWidget'; // <-- Import the widget
 import type { SiteSettings } from '@/types';
 
 const navLinks = [
@@ -131,7 +132,7 @@ export function PublicLayout({ children, settings }: { children: React.ReactNode
                         'rounded-xl px-4 py-3.5 text-base font-medium transition-colors',
                         isActive
                           ? 'bg-primary-50 text-primary-700'
-                          : 'text-slate-700 hover:bg-slate-50'
+                          : 'text-slate-700 hover:bg-slate-550'
                       )
                     }
                   >
@@ -164,6 +165,9 @@ export function PublicLayout({ children, settings }: { children: React.ReactNode
       <main className="flex-1">{children}</main>
 
       <Footer settings={settings} />
+
+      {/* Floating Quick WhatsApp & Call Widget */}
+      <QuickContactWidget />
     </div>
   );
 }
@@ -178,7 +182,7 @@ function Footer({ settings }: { settings: SiteSettings | null }) {
           <div className="space-y-4">
             <Logo variant="light" />
             <p className="text-sm leading-relaxed text-slate-400">
-              Professional diagnostic laboratory in Perumbavoor, Kerala. Accurate testing with secure digital report access.
+              Professional diagnostic laboratory. Accurate testing with secure digital report access.
             </p>
             {settings?.business_phone && (
               <a href={`tel:${settings.business_phone}`} className="inline-flex items-center gap-2 text-sm font-semibold text-cyan-300 hover:text-cyan-200">
