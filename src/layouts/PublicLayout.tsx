@@ -10,7 +10,6 @@ const navLinks = [
   { label: 'Home', path: '/' },
   { label: 'About', path: '/about' },
   { label: 'Services', path: '/services' },
-  { label: 'Tests', path: '/tests' },
   { label: 'Packages', path: '/packages' },
   { label: 'Contact', path: '/contact' },
 ];
@@ -77,9 +76,9 @@ export function PublicLayout({ children, settings }: { children: React.ReactNode
                 <FileSearch className="h-4 w-4" />
                 Get Your Report
               </Link>
-              <Link to="/book-test" className="btn-secondary text-xs">
+              <Link to="/packages" className="btn-secondary text-xs">
                 <CalendarPlus className="h-4 w-4" />
-                Book a Test
+                Book a Package
               </Link>
             </div>
 
@@ -146,9 +145,9 @@ export function PublicLayout({ children, settings }: { children: React.ReactNode
                   <FileSearch className="h-4 w-4" />
                   Get Your Report
                 </Link>
-                <Link to="/book-test" className="btn-secondary w-full">
+                <Link to="/packages" className="btn-secondary w-full">
                   <CalendarPlus className="h-4 w-4" />
-                  Book a Test
+                  Book a Package
                 </Link>
                 {settings?.business_phone && (
                   <a href={`tel:${settings.business_phone}`} className="btn-ghost w-full">
@@ -194,13 +193,12 @@ function Footer({ settings }: { settings: SiteSettings | null }) {
             <ul className="space-y-2.5 text-sm">
               {[
                 { label: 'Services', path: '/services' },
-                { label: 'Tests', path: '/tests' },
                 { label: 'Health Packages', path: '/packages' },
                 { label: 'Patient Reports', path: '/patient-reports' },
-                { label: 'Book a Test', path: '/book-test' },
+                { label: 'Book a Package', path: '/packages' },
                 { label: 'Contact', path: '/contact' },
               ].map((l) => (
-                <li key={l.path}>
+                <li key={l.path + l.label}>
                   <Link to={l.path} className="text-slate-400 transition-colors hover:text-white">{l.label}</Link>
                 </li>
               ))}
@@ -221,8 +219,8 @@ function Footer({ settings }: { settings: SiteSettings | null }) {
           <div>
             <h3 className="mb-4 text-sm font-semibold uppercase tracking-wider text-white">Get in Touch</h3>
             <div className="space-y-3 text-sm">
-              <Link to="/book-test" className="btn-primary w-full text-xs">
-                Book a Test
+              <Link to="/packages" className="btn-primary w-full text-xs">
+                Book a Package
               </Link>
               <Link to="/patient-reports" className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-white/10 px-5 py-3 text-xs font-semibold text-white ring-1 ring-inset ring-white/20 transition-colors hover:bg-white/15">
                 <FileSearch className="h-4 w-4" />

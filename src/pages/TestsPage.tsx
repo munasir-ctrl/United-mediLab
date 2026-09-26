@@ -5,105 +5,14 @@ interface DiagnosticItem {
   name: string;
   price: number;
   originalPrice?: number;
-  type: 'Test' | 'Package';
+  type: 'Package';
   category: string;
   description: string;
   parameters: string[];
 }
 
 const allCatalogItems: DiagnosticItem[] = [
-  // --- INDIVIDUAL TESTS (Test 1 - Test 9) ---
-  {
-    id: 'test-1',
-    name: 'Test 1',
-    price: 99,
-    type: 'Test',
-    category: 'Essential Blood Test',
-    description: 'Essential blood screening focusing on complete blood count and inflammation markers.',
-    parameters: ['Complete Blood Count (CBC) full parameters', 'ESR']
-  },
-  {
-    id: 'test-2',
-    name: 'Test 2',
-    price: 299,
-    type: 'Test',
-    category: 'Kidney & Sugar',
-    description: 'Kidney function and sugar screening profile.',
-    parameters: ['FBS', 'EGFR', 'RFT (Full Parameters)', 'UR/E (Full Parameters)']
-  },
-  {
-    id: 'test-3',
-    name: 'Test 3',
-    price: 599,
-    type: 'Test',
-    category: 'Iron & Anemia Profile',
-    description: 'Comprehensive iron deficiency and blood profile.',
-    parameters: ['Iron', 'TIBC', 'Ferritin', 'CBC (Full parameters)', 'ESR']
-  },
-  {
-    id: 'test-4',
-    name: 'Test 4',
-    price: 799,
-    type: 'Test',
-    category: 'Metabolic & Diabetic Screen',
-    description: 'Advanced diabetic, renal, and lipid assessment.',
-    parameters: ['FBS', 'HbA1c', 'CBC (Full parameters)', 'ESR', 'RFT (Full parameters)', 'UR/E (Full parameters)', 'Lipid (Full parameters)']
-  },
-  {
-    id: 'test-5',
-    name: 'Test 5',
-    price: 899,
-    type: 'Test',
-    category: 'Advanced Renal & Sugar',
-    description: 'Targeted microalbumin, diabetes, and lipid profile.',
-    parameters: ['FBS', 'EGFR', 'HbA1c', 'Microalbumin', 'Creatinine', 'CBC (Full parameters)', 'Lipid (Full parameters)']
-  },
-  {
-    id: 'test-6',
-    name: 'Test 6',
-    price: 1499,
-    type: 'Test',
-    category: 'Cardiac & Pancreatic',
-    description: 'Cardiac, pancreatic, and inflammatory enzyme markers.',
-    parameters: ['HSCRP', 'Lipase', 'Amylase', 'LDH', 'CBC (Full parameters)', 'ESR']
-  },
-  {
-    id: 'test-7',
-    name: 'Test 7',
-    price: 1999,
-    type: 'Test',
-    category: 'Multi-Organ Panel',
-    description: 'Multi-organ comprehensive diagnostic panel.',
-    parameters: ['CRP', 'ASO', 'RA', 'Calcium', 'CBC (Full parameters)', 'RFT (Full parameters)', 'UR/E (Full parameters)', 'Lipid (Full parameters)', 'LFT (Full parameters)']
-  },
-  {
-    id: 'test-8',
-    name: 'Test 8',
-    price: 2499,
-    type: 'Test',
-    category: 'Thyroid & Electrolyte',
-    description: 'Advanced thyroid, electrolyte, and metabolic screening.',
-    parameters: [
-      'FBS', 'HbA1c', 'Microalbumin', 'TSH', 'Anti TPO', 'Calcium', 
-      'Electrolytes', 'CBC (Full parameters)', 'RFT (Full parameters)', 
-      'UR/E (Full parameters)', 'UR/FE (Full parameters)', 'Lipid Profile (Full parameters)', 'LFT (Full parameters)'
-    ]
-  },
-  {
-    id: 'test-9',
-    name: 'Test 9',
-    price: 2999,
-    type: 'Test',
-    category: 'Comprehensive Expert Test',
-    description: 'Comprehensive multi-system expert health evaluation.',
-    parameters: [
-      'EGFR', 'HbA1c', 'GGT', 'Anti TPO', 'Testo', 'Amylase', 'Iron', 
-      'Lipase', 'T3', 'T4', 'TSH', 'CBC (Full parameters)', 'ESR', 
-      'RFT (Full parameters)', 'Lipid (Full parameters)', 'LFT (Full parameters)'
-    ]
-  },
-
-  // --- HEALTH PACKAGES ---
+  // --- HEALTH PACKAGES ONLY ---
   {
     id: 'complete-body-checkup',
     name: 'Complete Body Check-Up',
@@ -228,40 +137,45 @@ const allCatalogItems: DiagnosticItem[] = [
 
 export function TestsPage() {
   const [searchQuery, setSearchQuery] = useState('');
-  const [activeTab, setActiveTab] = useState<'All' | 'Test' | 'Package'>('All');
+
+  // Direct WhatsApp booking handler
+  const handleWhatsAppBooking = (packageName: string, price: number) => {
+    const phoneNumber = "919876543210"; // Replace with your lab's WhatsApp phone number
+    const message = encodeURIComponent(
+      `Hi, I would like to book the "${packageName}" package (Price: ₹${price}). Please guide me with the next steps.`
+    );
+    window.open(`https://wa.me/${phoneNumber}?text=${message}`, '_blank');
+  };
 
   const filteredItems = useMemo(() => {
     return allCatalogItems.filter((item) => {
-      const matchesSearch = 
+      return (
         item.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
         item.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
         item.category.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        item.parameters.some(param => param.toLowerCase().includes(searchQuery.toLowerCase()));
-      
-      const matchesTab = activeTab === 'All' || item.type === activeTab;
-
-      return matchesSearch && matchesTab;
+        item.parameters.some(param => param.toLowerCase().includes(searchQuery.toLowerCase()))
+      );
     });
-  }, [searchQuery, activeTab]);
+  }, [searchQuery]);
 
   return (
     <div className="min-h-screen bg-slate-900 text-slate-100 pb-20">
-      {/* Hero Header themed with Logo Blue & Teal */}
+      {/* Hero Header */}
       <div className="relative bg-gradient-to-r from-[#005288] via-[#0072bc] to-[#00a88f] pt-16 pb-20 px-4 sm:px-6 lg:px-8 border-b border-teal-500/20 shadow-2xl overflow-hidden">
         <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:16px_16px]"></div>
         <div className="max-w-7xl mx-auto text-center relative z-10">
           <span className="inline-block py-1 px-4 rounded-full bg-white/10 text-white font-semibold text-xs tracking-wider uppercase mb-4 border border-white/20 shadow-inner">
-            United Medilabs Catalog
+            United Medilabs Packages
           </span>
           <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight text-white mb-4">
-            Diagnostic Tests & <span className="text-teal-200">Health Packages</span>
+            Exclusive <span className="text-teal-200">Health Checkup Packages</span>
           </h1>
           <p className="text-blue-100 max-w-2xl mx-auto text-base sm:text-lg mb-8">
-            Browse our complete range of precision diagnostic tests first, followed by our heavily discounted comprehensive health packages.
+            Choose from our comprehensive, heavily discounted full body and specialized health checkup packages and book instantly via WhatsApp.
           </p>
 
-          {/* Search Bar & Filters */}
-          <div className="max-w-3xl mx-auto space-y-4">
+          {/* Search Bar */}
+          <div className="max-w-3xl mx-auto">
             <div className="relative shadow-2xl">
               <span className="absolute inset-y-0 left-0 pl-5 flex items-center pointer-events-none text-teal-300 text-lg">
                 🔍
@@ -270,30 +184,9 @@ export function TestsPage() {
                 type="text"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder="Search test names (e.g., Test 1, CBC, Lipid, Complete Body Check-Up)..."
+                placeholder="Search package name, parameters (e.g., Complete Body Check-Up, Lipid, CBC)..."
                 className="w-full pl-12 pr-6 py-4 bg-slate-900/90 backdrop-blur-md border border-teal-500/30 rounded-2xl text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-teal-400 focus:border-teal-400 transition-all text-sm sm:text-base shadow-inner"
               />
-            </div>
-
-            {/* Tabs */}
-            <div className="flex justify-center gap-2 pt-2">
-              {[
-                { label: 'All Catalog', value: 'All' },
-                { label: 'Individual Tests (1-9)', value: 'Test' },
-                { label: 'Health Packages', value: 'Package' },
-              ].map((tab) => (
-                <button
-                  key={tab.value}
-                  onClick={() => setActiveTab(tab.value as any)}
-                  className={`px-5 py-2.5 rounded-xl text-sm font-semibold transition-all duration-200 ${
-                    activeTab === tab.value
-                      ? 'bg-white text-[#005288] shadow-lg ring-2 ring-teal-300'
-                      : 'bg-slate-900/60 text-slate-300 hover:bg-slate-800 hover:text-white border border-white/10'
-                  }`}
-                >
-                  {tab.label}
-                </button>
-              ))}
             </div>
           </div>
         </div>
@@ -310,11 +203,7 @@ export function TestsPage() {
               >
                 <div>
                   <div className="flex justify-between items-start gap-3 mb-4">
-                    <span className={`px-3 py-1 text-xs font-bold rounded-full uppercase tracking-wider ${
-                      item.type === 'Test' 
-                        ? 'bg-[#0072bc]/20 text-blue-300 border border-[#0072bc]/40' 
-                        : 'bg-[#00a88f]/20 text-teal-300 border border-[#00a88f]/40'
-                    }`}>
+                    <span className="px-3 py-1 text-xs font-bold rounded-full uppercase tracking-wider bg-[#00a88f]/20 text-teal-300 border border-[#00a88f]/40">
                       {item.category}
                     </span>
                     <div className="text-right">
@@ -354,10 +243,10 @@ export function TestsPage() {
                 </div>
 
                 <button 
-                  onClick={() => alert(`Booking appointment inquiry for: ${item.name} (₹${item.price})`)}
-                  className="w-full py-3 bg-gradient-to-r from-[#0072bc] to-[#00a88f] hover:from-[#005288] hover:to-[#008f79] text-white font-semibold rounded-2xl transition-all duration-200 text-sm shadow-lg shadow-[#0072bc]/30 active:scale-[0.98]"
+                  onClick={() => handleWhatsAppBooking(item.name, item.price)}
+                  className="w-full py-3 bg-emerald-600 hover:bg-emerald-500 text-white font-semibold rounded-2xl transition-all duration-200 text-sm shadow-lg shadow-emerald-600/30 active:scale-[0.98] flex items-center justify-center gap-2"
                 >
-                  Book {item.type} Now
+                  Book via WhatsApp 💬
                 </button>
               </div>
             ))}
@@ -365,8 +254,8 @@ export function TestsPage() {
         ) : (
           <div className="text-center py-24 bg-slate-800/40 rounded-3xl border border-slate-800 max-w-lg mx-auto">
             <div className="text-5xl mb-4">🔍</div>
-            <h3 className="text-xl font-bold text-white mb-2">No matching tests or packages found</h3>
-            <p className="text-slate-400 text-sm px-6">Try refining your search keyword or selecting a different catalog tab.</p>
+            <h3 className="text-xl font-bold text-white mb-2">No matching packages found</h3>
+            <p className="text-slate-400 text-sm px-6">Try refining your search keyword.</p>
           </div>
         )}
       </div>

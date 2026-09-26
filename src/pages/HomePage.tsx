@@ -47,41 +47,31 @@ export function HomePage() {
   ];
 
   return (
-    <div className="min-h-screen bg-slate-50 text-slate-800 overflow-x-hidden">
+    <div className="min-h-screen bg-[#FBFBFA] text-slate-900 overflow-x-hidden font-sans selection:bg-amber-100 selection:text-amber-900">
       
       {/* 1. ANIMATED TOP FLASH OFFER BANNER */}
       <motion.div 
         initial={{ y: -50, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.5 }}
-        className="bg-gradient-to-r from-cyan-600 via-blue-600 to-indigo-600 px-4 py-3 text-center text-xs font-semibold text-white sm:text-sm flex items-center justify-center gap-2 shadow-md relative overflow-hidden"
+        className="bg-gradient-to-r from-slate-900 via-navy-950 to-slate-900 px-4 py-3 text-center text-xs font-medium text-slate-200 sm:text-sm flex items-center justify-center gap-2 shadow-inner border-b border-amber-500/20 relative overflow-hidden"
       >
         <motion.div
-          animate={{ scale: [1, 1.2, 1] }}
-          transition={{ repeat: Infinity, duration: 1.5 }}
-          className="flex items-center gap-1 bg-white/20 px-2 py-0.5 rounded-full text-amber-300 font-bold"
+          animate={{ scale: [1, 1.15, 1] }}
+          transition={{ repeat: Infinity, duration: 1.8 }}
+          className="flex items-center gap-1.5 bg-amber-500/10 px-2.5 py-0.5 rounded-md text-amber-400 font-semibold border border-amber-500/30"
         >
-          <Flame className="h-4 w-4 fill-amber-300" /> SPECIAL OFFER
+          <Flame className="h-3.5 w-3.5 fill-amber-400 text-amber-400" /> SPECIAL OFFER
         </motion.div>
-        <span>Complete Body Check-Up for only <strong className="underline text-amber-300 font-extrabold">₹999</strong> + Free Home Collection!</span>
+        <span>Complete Body Check-Up for only <strong className="underline decoration-amber-500 underline-offset-4 text-amber-400 font-bold">₹999</strong> + Free Home Collection!</span>
       </motion.div>
 
       {/* 2. HERO SECTION WITH DYNAMIC ANIMATIONS */}
-      <section className="relative overflow-hidden bg-white py-16 lg:py-24">
-        {/* Animated Background Particles */}
-        <div className="pointer-events-none absolute inset-0 overflow-hidden">
-          {Array.from({ length: 8 }).map((_, i) => (
-            <motion.div
-              key={i}
-              className="absolute h-2 w-2 rounded-full bg-cyan-400/40"
-              style={{ left: `${10 + i * 12}%`, top: `${15 + (i % 4) * 20}%` }}
-              animate={{ y: [0, -30, 0], opacity: [0.2, 0.8, 0.2], scale: [1, 1.3, 1] }}
-              transition={{ duration: 3 + i, repeat: Infinity, ease: 'easeInOut' }}
-            />
-          ))}
-        </div>
+      <section className="relative overflow-hidden bg-white py-20 lg:py-28 border-b border-slate-200/60">
+        {/* Subtle Classic Background Grid & Elements */}
+        <div className="pointer-events-none absolute inset-0 opacity-[0.03] bg-[radial-gradient(#0f172a_1px,transparent_1px)] [background-size:24px_24px]" />
 
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="grid items-center gap-12 lg:grid-cols-2">
             <motion.div 
               initial={{ opacity: 0, x: -30 }} 
@@ -89,86 +79,90 @@ export function HomePage() {
               transition={{ duration: 0.6 }}
             >
               <motion.div 
-                initial={{ scale: 0.9 }}
+                initial={{ scale: 0.95 }}
                 animate={{ scale: 1 }}
-                transition={{ repeat: Infinity, duration: 2, repeatType: "reverse" }}
-                className="inline-flex items-center gap-2 rounded-full bg-cyan-50 px-3.5 py-1.5 text-xs font-bold text-cyan-700 sm:text-sm border border-cyan-200"
+                transition={{ repeat: Infinity, duration: 2.5, repeatType: "reverse" }}
+                className="inline-flex items-center gap-2 rounded-md bg-amber-50 px-3.5 py-1.5 text-xs font-semibold text-amber-900 sm:text-sm border border-amber-200/80 shadow-sm"
               >
-                <Sparkles className="h-4 w-4 text-cyan-600 animate-spin" /> United Mediclinic Diagnostics
+                <Sparkles className="h-4 w-4 text-amber-600" /> United Mediclinic Diagnostics
               </motion.div>
               
-              <h1 className="mt-4 text-4xl font-extrabold tracking-tight text-slate-900 sm:text-5xl lg:text-6xl">
-                Precision <span className="text-cyan-600">Lab Testing</span> & Diagnostics at Your Doorstep
+              <h1 className="mt-6 text-4xl font-serif font-bold tracking-tight text-slate-900 sm:text-5xl lg:text-6xl leading-[1.15]">
+                Precision <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-700 to-amber-600">Lab Testing</span> & Diagnostics at Your Doorstep
               </h1>
               
-              <p className="mt-4 text-lg text-slate-600">
+              <p className="mt-6 text-lg text-slate-600 font-normal leading-relaxed">
                 Accurate pathology results, specialized biomarker panels, and free hygienic sample collection backed by advanced laboratory infrastructure.
               </p>
               
               <div className="mt-8 flex flex-wrap gap-4">
-                <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
                   <Link 
                     to="/packages" 
-                    className="flex items-center gap-2 rounded-xl bg-cyan-600 px-6 py-3.5 font-semibold text-white shadow-lg shadow-cyan-600/30 transition-all hover:bg-cyan-700"
+                    className="flex items-center gap-2 rounded-xl bg-slate-900 px-7 py-4 font-medium text-white shadow-xl shadow-slate-900/10 transition-all hover:bg-slate-800 border border-slate-800"
                   >
-                    Explore Lab Packages <ChevronRight className="h-4 w-4" />
+                    Explore Lab Packages <ChevronRight className="h-4 w-4 text-amber-400" />
                   </Link>
                 </motion.div>
 
-                <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
                   <Link 
                     to="/patient-reports" 
-                    className="flex items-center gap-2 rounded-xl border border-slate-300 bg-white px-6 py-3.5 font-semibold text-slate-700 shadow-sm transition-all hover:bg-slate-50"
+                    className="flex items-center gap-2 rounded-xl border border-slate-300 bg-white px-7 py-4 font-medium text-slate-700 shadow-sm transition-all hover:bg-slate-50 hover:border-slate-400"
                   >
-                    <FileText className="h-4 w-4 text-cyan-600" /> Download Reports
+                    <FileText className="h-4 w-4 text-amber-600" /> Download Reports
                   </Link>
                 </motion.div>
               </div>
 
-              <div className="mt-10 grid grid-cols-3 gap-4 border-t border-slate-100 pt-6">
+              <div className="mt-12 grid grid-cols-3 gap-6 border-t border-slate-200/80 pt-6">
                 <div>
-                  <p className="text-2xl font-extrabold text-cyan-600">100%</p>
-                  <p className="text-xs text-slate-500">Quality Assured</p>
+                  <p className="text-3xl font-serif font-bold text-slate-900">100<span className="text-amber-600">%</span></p>
+                  <p className="text-xs text-slate-500 font-medium mt-0.5 uppercase tracking-wider">Quality Assured</p>
                 </div>
                 <div>
-                  <p className="text-2xl font-extrabold text-cyan-600">24 Hrs</p>
-                  <p className="text-xs text-slate-500">Fast Digital Reports</p>
+                  <p className="text-3xl font-serif font-bold text-slate-900">24<span className="text-amber-600">H</span></p>
+                  <p className="text-xs text-slate-500 font-medium mt-0.5 uppercase tracking-wider">Fast Digital Reports</p>
                 </div>
                 <div>
-                  <p className="text-2xl font-extrabold text-cyan-600">Free</p>
-                  <p className="text-xs text-slate-500">Home Phlebotomy</p>
+                  <p className="text-3xl font-serif font-bold text-slate-900">Free</p>
+                  <p className="text-xs text-slate-500 font-medium mt-0.5 uppercase tracking-wider">Home Phlebotomy</p>
                 </div>
               </div>
             </motion.div>
 
             {/* Animated Hero Card / Visual Element */}
             <motion.div 
-              initial={{ opacity: 0, scale: 0.9 }} 
+              initial={{ opacity: 0, scale: 0.95 }} 
               animate={{ opacity: 1, scale: 1 }} 
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="relative lg:h-[450px] flex items-center justify-center"
+              className="relative lg:h-[480px] flex items-center justify-center"
             >
-              <div className="relative h-full w-full rounded-3xl bg-gradient-to-br from-cyan-500/15 via-blue-500/10 to-indigo-500/5 p-8 border border-cyan-200 flex flex-col justify-center items-center text-center shadow-2xl backdrop-blur-sm">
+              <div className="relative h-full w-full rounded-3xl bg-gradient-to-b from-slate-900 via-slate-900 to-slate-950 p-10 border border-slate-800 flex flex-col justify-center items-center text-center shadow-2xl overflow-hidden">
                 
+                {/* Subtle internal aura */}
+                <div className="absolute -top-24 -right-24 w-72 h-72 bg-amber-500/10 rounded-full blur-3xl pointer-events-none" />
+                <div className="absolute -bottom-24 -left-24 w-72 h-72 bg-blue-500/10 rounded-full blur-3xl pointer-events-none" />
+
                 {/* Glowing Pulsing Icon */}
                 <motion.div 
-                  animate={{ scale: [1, 1.1, 1], rotate: [0, 5, -5, 0] }}
+                  animate={{ scale: [1, 1.05, 1] }}
                   transition={{ repeat: Infinity, duration: 4 }}
-                  className="rounded-full bg-cyan-600/20 p-6 mb-6 text-cyan-600"
+                  className="rounded-2xl bg-white/5 p-6 mb-6 text-amber-400 border border-white/10 shadow-inner"
                 >
-                  <HeartPulse className="h-20 w-20 animate-pulse" />
+                  <HeartPulse className="h-16 w-16 animate-pulse" />
                 </motion.div>
 
-                <h3 className="text-2xl font-extrabold text-slate-900">Advanced Pathology Lab</h3>
-                <p className="text-sm text-slate-600 max-w-sm mt-2">Equipped with state-of-the-art diagnostic machinery for zero-error clinical testing.</p>
+                <h3 className="text-2xl font-serif font-bold text-white tracking-wide">Advanced Pathology Lab</h3>
+                <p className="text-sm text-slate-400 max-w-sm mt-3 leading-relaxed">Equipped with state-of-the-art diagnostic machinery for zero-error clinical testing.</p>
 
                 {/* Floating Animated Discount Badge */}
                 <motion.div 
-                  animate={{ y: [-5, 5, -5] }}
-                  transition={{ repeat: Infinity, duration: 3, ease: "easeInOut" }}
-                  className="absolute -top-4 -right-4 rounded-2xl bg-gradient-to-r from-amber-500 to-orange-500 px-4 py-2 text-white font-bold text-sm shadow-lg flex items-center gap-1.5"
+                  animate={{ y: [-4, 4, -4] }}
+                  transition={{ repeat: Infinity, duration: 3.5, ease: "easeInOut" }}
+                  className="absolute -top-3 -right-3 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 px-4 py-2.5 text-slate-950 font-bold text-xs shadow-xl flex items-center gap-1.5 border border-amber-400/40"
                 >
-                  <Flame className="h-4 w-4" /> Full Body Checkup @ ₹999
+                  <Flame className="h-4 w-4 fill-slate-950" /> Full Body Checkup @ ₹999
                 </motion.div>
               </div>
             </motion.div>
@@ -177,35 +171,43 @@ export function HomePage() {
       </section>
 
       {/* 3. TRUST INDICATORS */}
-      <section className="bg-slate-900 py-8 text-white">
+      <section className="bg-slate-900 py-10 text-white border-y border-slate-800">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 gap-6 md:grid-cols-4">
-            <div className="flex items-center gap-3">
-              <ShieldCheck className="h-8 w-8 text-cyan-400" />
+          <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
+            <div className="flex items-center gap-4">
+              <div className="p-2.5 rounded-xl bg-white/5 border border-white/10 text-amber-400">
+                <ShieldCheck className="h-6 w-6" />
+              </div>
               <div>
-                <h4 className="font-semibold text-sm">Certified Lab</h4>
-                <p className="text-xs text-slate-400">Accredited diagnostics</p>
+                <h4 className="font-semibold text-sm tracking-wide text-white">Certified Lab</h4>
+                <p className="text-xs text-slate-400 mt-0.5">Accredited diagnostics</p>
               </div>
             </div>
-            <div className="flex items-center gap-3">
-              <Truck className="h-8 w-8 text-cyan-400" />
+            <div className="flex items-center gap-4">
+              <div className="p-2.5 rounded-xl bg-white/5 border border-white/10 text-amber-400">
+                <Truck className="h-6 w-6" />
+              </div>
               <div>
-                <h4 className="font-semibold text-sm">Home Collection</h4>
-                <p className="text-xs text-slate-400">Hygienic and safe</p>
+                <h4 className="font-semibold text-sm tracking-wide text-white">Home Collection</h4>
+                <p className="text-xs text-slate-400 mt-0.5">Hygienic and safe</p>
               </div>
             </div>
-            <div className="flex items-center gap-3">
-              <Clock className="h-8 w-8 text-cyan-400" />
+            <div className="flex items-center gap-4">
+              <div className="p-2.5 rounded-xl bg-white/5 border border-white/10 text-amber-400">
+                <Clock className="h-6 w-6" />
+              </div>
               <div>
-                <h4 className="font-semibold text-sm">Quick Turnaround</h4>
-                <p className="text-xs text-slate-400">Results in 12-24 hours</p>
+                <h4 className="font-semibold text-sm tracking-wide text-white">Quick Turnaround</h4>
+                <p className="text-xs text-slate-400 mt-0.5">Results in 12-24 hours</p>
               </div>
             </div>
-            <div className="flex items-center gap-3">
-              <PhoneCall className="h-8 w-8 text-cyan-400" />
+            <div className="flex items-center gap-4">
+              <div className="p-2.5 rounded-xl bg-white/5 border border-white/10 text-amber-400">
+                <PhoneCall className="h-6 w-6" />
+              </div>
               <div>
-                <h4 className="font-semibold text-sm">Support 24/7</h4>
-                <p className="text-xs text-slate-400">Always available to help</p>
+                <h4 className="font-semibold text-sm tracking-wide text-white">Support 24/7</h4>
+                <p className="text-xs text-slate-400 mt-0.5">Always available to help</p>
               </div>
             </div>
           </div>
@@ -213,45 +215,45 @@ export function HomePage() {
       </section>
 
       {/* 4. REPORT PORTAL QUICK ACCESS BANNER */}
-      <section className="bg-cyan-50 py-10 border-y border-cyan-100">
+      <section className="bg-amber-50/50 py-12 border-b border-amber-100/60">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6">
-          <div className="flex items-center gap-4">
-            <div className="rounded-2xl bg-cyan-600 p-4 text-white shadow-md">
-              <FileText className="h-8 w-8" />
+          <div className="flex items-center gap-5">
+            <div className="rounded-2xl bg-amber-500/10 border border-amber-500/20 p-4 text-amber-800 shadow-sm">
+              <FileText className="h-7 w-7" />
             </div>
             <div>
-              <h3 className="text-xl font-bold text-slate-900">Looking for your lab test results?</h3>
-              <p className="text-sm text-slate-600">Access and download your digital diagnostic reports securely anytime.</p>
+              <h3 className="text-xl font-serif font-bold text-slate-900">Looking for your lab test results?</h3>
+              <p className="text-sm text-slate-600 mt-1">Access and download your digital diagnostic reports securely anytime.</p>
             </div>
           </div>
-          <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+          <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
             <Link 
               to="/patient-reports"
-              className="flex items-center gap-2 rounded-xl bg-slate-900 px-6 py-3 text-sm font-semibold text-white shadow-md transition-all hover:bg-cyan-600"
+              className="flex items-center gap-2 rounded-xl bg-slate-900 px-7 py-3.5 text-sm font-medium text-white shadow-md transition-all hover:bg-slate-800"
             >
-              Access Report Portal <ArrowRight className="h-4 w-4" />
+              Access Report Portal <ArrowRight className="h-4 w-4 text-amber-400" />
             </Link>
           </motion.div>
         </div>
       </section>
 
       {/* 5. ANIMATED FEATURED HEALTH PACKAGES GRID */}
-      <section className="py-20 bg-gradient-to-b from-slate-50 to-cyan-50/20">
+      <section className="py-24 bg-gradient-to-b from-[#FBFBFA] to-slate-100/50">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="text-center">
+          <div className="text-center max-w-2xl mx-auto">
             <motion.span 
               initial={{ opacity: 0, y: 10 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="inline-block rounded-full bg-cyan-100 px-4 py-1.5 text-xs font-bold text-cyan-800 uppercase tracking-wider"
+              className="inline-block rounded-md bg-amber-100/80 px-3.5 py-1 text-xs font-semibold text-amber-900 uppercase tracking-widest border border-amber-200"
             >
               Special Discounts
             </motion.span>
-            <h2 className="mt-3 text-3xl font-extrabold text-slate-900 sm:text-4xl">Featured Diagnostic Packages</h2>
-            <p className="mt-2 text-slate-600 max-w-xl mx-auto">Book high-precision health screening profiles with official promotional pricing.</p>
+            <h2 className="mt-4 text-3xl font-serif font-bold text-slate-900 sm:text-4xl">Featured Diagnostic Packages</h2>
+            <p className="mt-3 text-slate-600">Book high-precision health screening profiles with official promotional pricing.</p>
           </div>
 
-          <div className="mt-12 grid gap-8 md:grid-cols-3">
+          <div className="mt-16 grid gap-8 md:grid-cols-3">
             {promotionalPackages.map((pkg, idx) => (
               <motion.div 
                 key={pkg.id} 
@@ -259,41 +261,41 @@ export function HomePage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: idx * 0.15 }}
-                whileHover={{ y: -8, transition: { duration: 0.2 } }}
-                className="relative rounded-3xl border border-cyan-100 bg-white p-7 shadow-xl shadow-cyan-950/5 flex flex-col justify-between overflow-hidden group"
+                whileHover={{ y: -6, transition: { duration: 0.2 } }}
+                className="relative rounded-3xl border border-slate-200/80 bg-white p-8 shadow-xl shadow-slate-950/[0.03] flex flex-col justify-between overflow-hidden group"
               >
-                {/* Glow effect on hover */}
-                <div className="absolute inset-0 bg-gradient-to-b from-cyan-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
+                {/* Subtle top accent border on hover */}
+                <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-amber-500 to-amber-600 opacity-0 group-hover:opacity-100 transition-opacity" />
 
                 <div>
                   <div className="flex items-center justify-between">
-                    <span className="rounded-full bg-cyan-100 px-3 py-1 text-xs font-extrabold text-cyan-800">
+                    <span className="rounded-md bg-slate-100 px-3 py-1 text-xs font-semibold text-slate-800 border border-slate-200">
                       {pkg.tag}
                     </span>
                     <motion.span 
-                      animate={{ scale: [1, 1.08, 1] }}
-                      transition={{ repeat: Infinity, duration: 2 }}
-                      className="rounded-full bg-amber-500 px-3 py-1 text-xs font-extrabold text-white shadow-sm"
+                      animate={{ scale: [1, 1.05, 1] }}
+                      transition={{ repeat: Infinity, duration: 2.5 }}
+                      className="rounded-md bg-amber-500 px-2.5 py-1 text-xs font-bold text-slate-950 shadow-sm"
                     >
                       {pkg.discount}
                     </motion.span>
                   </div>
 
-                  <h3 className="mt-5 text-xl font-extrabold text-slate-900 group-hover:text-cyan-600 transition-colors">{pkg.name}</h3>
+                  <h3 className="mt-6 text-xl font-serif font-bold text-slate-900 group-hover:text-amber-700 transition-colors">{pkg.name}</h3>
                   <p className="mt-2 text-xs font-medium text-slate-500 flex items-center gap-1.5">
-                    <TestTube2 className="h-4 w-4 text-cyan-600" /> Includes comprehensive parameters
+                    <TestTube2 className="h-4 w-4 text-amber-600" /> Includes comprehensive parameters
                   </p>
                 </div>
                 
-                <div className="mt-8 pt-4 border-t border-slate-100">
-                  <div className="flex items-baseline gap-2">
-                    <span className="text-3xl font-extrabold text-cyan-600">{pkg.price}</span>
-                    <span className="text-sm text-slate-400 line-through">{pkg.originalPrice}</span>
+                <div className="mt-10 pt-6 border-t border-slate-100">
+                  <div className="flex items-baseline gap-2.5">
+                    <span className="text-3xl font-serif font-bold text-slate-900">{pkg.price}</span>
+                    <span className="text-sm text-slate-400 line-through font-medium">{pkg.originalPrice}</span>
                   </div>
 
                   <Link 
                     to="/packages"
-                    className="mt-5 block w-full rounded-xl bg-slate-900 py-3.5 text-center text-sm font-bold text-white transition-all hover:bg-cyan-600 shadow-md group-hover:shadow-cyan-600/30"
+                    className="mt-6 block w-full rounded-xl bg-slate-900 py-3.5 text-center text-sm font-medium text-white transition-all hover:bg-slate-800 shadow-md group-hover:shadow-lg"
                   >
                     Book Lab Package Now
                   </Link>
@@ -305,27 +307,27 @@ export function HomePage() {
       </section>
 
       {/* 6. DIAGNOSTIC SERVICES */}
-      <section className="bg-white py-20 border-t border-slate-200">
+      <section className="bg-white py-24 border-t border-slate-200/60">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="text-center">
-            <h2 className="text-3xl font-extrabold text-slate-900">Comprehensive Laboratory Services</h2>
-            <p className="mt-2 text-slate-600">Advanced diagnostic testing solutions tailored for precision and speed.</p>
+          <div className="text-center max-w-2xl mx-auto">
+            <h2 className="text-3xl font-serif font-bold text-slate-900">Comprehensive Laboratory Services</h2>
+            <p className="mt-3 text-slate-600">Advanced diagnostic testing solutions tailored for precision and speed.</p>
           </div>
 
-          <div className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-16 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
             {diagnosticServices.map((srv, idx) => {
               const Icon = srv.icon;
               return (
                 <motion.div 
                   key={idx} 
-                  whileHover={{ y: -5 }}
-                  className="rounded-2xl border border-slate-100 bg-slate-50 p-6 shadow-sm transition-all hover:shadow-md"
+                  whileHover={{ y: -4 }}
+                  className="rounded-2xl border border-slate-200/80 bg-[#FBFBFA] p-7 shadow-sm transition-all hover:shadow-md hover:border-slate-300 group"
                 >
-                  <div className="inline-block rounded-xl bg-cyan-100 p-3 text-cyan-700">
+                  <div className="inline-block rounded-xl bg-white p-3.5 text-amber-700 shadow-sm border border-slate-200/60 group-hover:border-amber-500/30 transition-colors">
                     <Icon className="h-6 w-6" />
                   </div>
-                  <h3 className="mt-4 text-lg font-bold text-slate-900">{srv.title}</h3>
-                  <p className="mt-2 text-sm text-slate-600">{srv.desc}</p>
+                  <h3 className="mt-5 text-lg font-serif font-bold text-slate-900">{srv.title}</h3>
+                  <p className="mt-2.5 text-sm text-slate-600 leading-relaxed">{srv.desc}</p>
                 </motion.div>
               );
             })}
@@ -334,19 +336,19 @@ export function HomePage() {
       </section>
 
       {/* 7. HOW IT WORKS */}
-      <section className="py-20 bg-slate-50">
+      <section className="py-24 bg-slate-50/50 border-t border-slate-200/60">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="text-center">
-            <h2 className="text-3xl font-extrabold text-slate-900">How Home Sample Collection Works</h2>
-            <p className="mt-2 text-slate-600">Simple, sterile, and hassle-free testing steps right from your home.</p>
+          <div className="text-center max-w-2xl mx-auto">
+            <h2 className="text-3xl font-serif font-bold text-slate-900">How Home Sample Collection Works</h2>
+            <p className="mt-3 text-slate-600">Simple, sterile, and hassle-free testing steps right from your home.</p>
           </div>
 
-          <div className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-16 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
             {steps.map((st, i) => (
-              <div key={i} className="relative rounded-2xl border border-slate-200 bg-white p-6 text-center shadow-sm">
-                <span className="text-3xl font-extrabold text-cyan-600/40">{st.step}</span>
-                <h3 className="mt-2 text-lg font-bold text-slate-900">{st.title}</h3>
-                <p className="mt-2 text-sm text-slate-600">{st.desc}</p>
+              <div key={i} className="relative rounded-2xl border border-slate-200/80 bg-white p-8 text-center shadow-sm">
+                <span className="text-3xl font-serif font-bold text-amber-600/50">{st.step}</span>
+                <h3 className="mt-3 text-lg font-serif font-bold text-slate-900">{st.title}</h3>
+                <p className="mt-2.5 text-sm text-slate-600 leading-relaxed">{st.desc}</p>
               </div>
             ))}
           </div>
@@ -354,25 +356,25 @@ export function HomePage() {
       </section>
 
       {/* 8. FAQ SECTION */}
-      <section className="py-20 bg-white border-t border-slate-200">
+      <section className="py-24 bg-white border-t border-slate-200/60">
         <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <h2 className="text-3xl font-extrabold text-slate-900">Frequently Asked Questions</h2>
-            <p className="mt-2 text-slate-600">Got questions? We have answers regarding bookings and lab reports.</p>
+            <h2 className="text-3xl font-serif font-bold text-slate-900">Frequently Asked Questions</h2>
+            <p className="mt-3 text-slate-600">Got questions? We have answers regarding bookings and lab reports.</p>
           </div>
 
-          <div className="mt-8 space-y-4">
+          <div className="mt-12 space-y-4">
             {faqs.map((faq, idx) => (
-              <div key={idx} className="rounded-xl border border-slate-200 bg-slate-50 p-4">
+              <div key={idx} className="rounded-xl border border-slate-200/80 bg-[#FBFBFA] overflow-hidden transition-all">
                 <button 
                   onClick={() => setOpenFaq(openFaq === idx ? null : idx)}
-                  className="flex w-full items-center justify-between font-semibold text-slate-900 text-left"
+                  className="flex w-full items-center justify-between p-5 font-semibold text-slate-900 text-left hover:bg-slate-100/50 transition-colors"
                 >
-                  <span>{faq.question}</span>
-                  <span className="text-cyan-600 font-bold text-lg">{openFaq === idx ? '-' : '+'}</span>
+                  <span className="font-serif text-base">{faq.question}</span>
+                  <span className="text-amber-700 font-bold text-xl ml-4">{openFaq === idx ? '−' : '+'}</span>
                 </button>
                 {openFaq === idx && (
-                  <p className="mt-3 text-sm text-slate-600 border-t border-slate-200 pt-3">
+                  <p className="px-5 pb-5 text-sm text-slate-600 leading-relaxed border-t border-slate-200/60 pt-4 bg-white">
                     {faq.answer}
                   </p>
                 )}

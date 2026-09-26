@@ -82,7 +82,7 @@ export default function App() {
               <Route path="/book-test" element={<PublicLayoutWrapper><BookTestPage /></PublicLayoutWrapper>} />
               <Route path="/contact" element={<PublicLayoutWrapper><ContactPage /></PublicLayoutWrapper>} />
               <Route path="/locations" element={<PublicLayoutWrapper><LocationsPage /></PublicLayoutWrapper>} />
-              <Route path="/patient-reports" element={<PublicLayoutWrapper><PatientReportsPage /></PublicLayoutWrapper>} />
+              <Route path="/reports" element={<PublicLayoutWrapper><PatientReportsPage /></PublicLayoutWrapper>} />
               <Route path="/privacy" element={<PublicLayoutWrapper><PrivacyPage /></PublicLayoutWrapper>} />
               <Route path="/terms" element={<PublicLayoutWrapper><TermsPage /></PublicLayoutWrapper>} />
 
@@ -123,9 +123,11 @@ export default function App() {
 function NotFound() {
   return (
     <div className="flex min-h-[60vh] flex-col items-center justify-center text-center">
-      <h1 className="text-6xl font-extrabold text-navy-900">404</h1>
+      <h1 className="text-6xl font-extrabold text-slate-900">404</h1>
       <p className="mt-4 text-slate-500">The page you're looking for doesn't exist.</p>
-      <a href="/" className="btn-primary mt-6">Go Home</a>
+      <a href="/" className="mt-6 rounded-xl bg-slate-900 px-5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-teal-600 transition-colors">
+        Go Home
+      </a>
     </div>
   );
 }

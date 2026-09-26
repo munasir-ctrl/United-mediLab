@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { toast } from 'sonner';
-import { Loader2, MapPin, Phone, Clock, Send } from 'lucide-react';
+import { Loader2, MapPin, Phone, Clock, Send, MessageCircle } from 'lucide-react';
 import { SEO, organizationJsonLd } from '@/components/SEO';
 import { getSiteSettings, createContactMessage } from '@/services/data-service';
 import type { SiteSettings } from '@/types';
@@ -21,6 +21,7 @@ type FormValues = z.infer<typeof schema>;
 export function ContactPage() {
   const [settings, setSettings] = useState<SiteSettings | null>(null);
   const [submitting, setSubmitting] = useState(false);
+  const [contactMode, setContactMode] = useState<'call' | 'whatsapp'>('whatsapp');
 
   const { register, handleSubmit, reset, formState: { errors } } = useForm<FormValues>({
     resolver: zodResolver(schema),
@@ -50,6 +51,9 @@ export function ContactPage() {
     }
   }
 
+  const phoneNumber = settings?.business_phone || '';
+  const cleanPhone = phoneNumber.replace(/\D/g, '');
+
   return (
     <>
       <SEO
@@ -70,6 +74,67 @@ export function ContactPage() {
 
       <section className="py-14 md:py-20">
         <div className="container-page">
+          {/* Quick WhatsApp & Call Toggle Bar */}
+          <div className="mb-10 rounded-2xl bg-slate-50 p-6 ring-1 ring-slate-200/60 md:p-8">
+            <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
+              <div>
+                <h3 className="text-lg font-bold text-navy-900">Need immediate assistance?</h3>
+                <p className="text-sm text-slate-500">Choose your preferred quick connection method below.</p>
+              </div>
+
+              <div className="flex items-center gap-3">
+                {/* Toggle Buttons */}
+                <div className="inline-flex rounded-xl bg-slate-200/70 p-1">
+                  <button
+                    type="button"
+                    onClick={() => setContactMode('whatsapp')}
+                    className={`flex items-center gap-2 rounded-lg px-4 py-2 text-sm font-semibold transition-all ${
+                      contactMode === 'whatsapp'
+                        ? 'bg-emerald-600 text-white shadow-sm'
+                        : 'text-slate-600 hover:text-navy-900'
+                    }`}
+                  >
+                    <MessageCircle className="h-4 w-4" />
+                    WhatsApp
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setContactMode('call')}
+                    className={`flex items-center gap-2 rounded-lg px-4 py-2 text-sm font-semibold transition-all ${
+                      contactMode === 'call'
+                        ? 'bg-primary-600 text-white shadow-sm'
+                        : 'text-slate-600 hover:text-navy-900'
+                    }`}
+                  >
+                    <Phone className="h-4 w-4" />
+                    Direct Call
+                  </button>
+                </div>
+
+                {/* Action Button based on toggle */}
+                {contactMode === 'whatsapp' ? (
+                  <a
+                    href={`https://wa.me/${cleanPhone}?text=Hello%20United%20MediLab,%20I%20have%20a%20query.`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 rounded-xl bg-emerald-600 px-5 py-2.5 text-sm font-semibold text-white shadow-md hover:bg-emerald-700 transition-colors"
+                  >
+                    <MessageCircle className="h-4 w-4" />
+                    Chat Now
+                  </a>
+                ) : (
+                  <a
+                    href={`tel:${phoneNumber}`}
+                    className="inline-flex items-center gap-2 rounded-xl bg-primary-600 px-5 py-2.5 text-sm font-semibold text-white shadow-md hover:bg-primary-700 transition-colors"
+                  >
+                    <Phone className="h-4 w-4" />
+                    Call Now
+                  </a>
+                )}
+              </div>
+            </div>
+          </div>
+
           <div className="grid gap-8 lg:grid-cols-2">
             {/* Contact info */}
             <div className="space-y-6">
